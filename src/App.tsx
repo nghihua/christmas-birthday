@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
+import ReactHowler from 'react-howler';
 
 function App() {
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
   const [isFacedLeft, setIsFacedLeft] = useState<boolean>(true);
   const [isNearGuitar, setIsNearGuitar] = useState<boolean>(false);
+  const [isMusicPlayed, setIsMusicPlayed] = useState<boolean>(false);
   const windowWidth = window.innerWidth;
   const catSize = 300;
   const guitarXCoordinate = (windowWidth)/2 - 200;
@@ -21,6 +23,9 @@ function App() {
     }
     if ((catXCoordinate>(guitarXCoordinate-interactDistance) && (catXCoordinate<(guitarXCoordinate+interactDistance)))) {
       setIsNearGuitar(true);
+      if (event.code === "Enter") {
+        setIsMusicPlayed(true);
+      }
     }
     else {
       setIsNearGuitar(false);
@@ -32,6 +37,14 @@ function App() {
       onKeyDown={handleKeyDown}
       tabIndex={0}
       className='w-screen h-screen grid grid-rows-6'>
+        
+      <div className='hidden'>
+        <ReactHowler
+          src='birthday.mp3'
+          playing={isMusicPlayed}
+          loop
+        />
+      </div>
 
         {/* wall */}
         <div className='relative bg-gray-200 row-span-5'>
