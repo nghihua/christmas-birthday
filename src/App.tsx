@@ -1,21 +1,18 @@
-import React, {useState} from 'react';
-import ReactHowler from 'react-howler';
-import GuitarRoom from './components/rooms/GuitarRoom';
+import React, { useState } from "react";
+import ReactHowler from "react-howler";
+import GuitarRoom from "./components/rooms/GuitarRoom";
 
 function App() {
-
   const [isMusicPlayed, setIsMusicPlayed] = useState<boolean>(false);
 
   return (
     <div>
-      <div className='hidden'>
-        <ReactHowler
-          src='birthday.mp3'
-          playing={isMusicPlayed}
-          loop
-        />
+      <div className="hidden">
+        <ReactHowler src="birthday.mp3" playing={isMusicPlayed} loop />
       </div>
-      <GuitarRoom setIsMusicPlayed={setIsMusicPlayed}/>
+      <div className="flex items-center justify-center">
+        <GuitarRoom setIsMusicPlayed={setIsMusicPlayed} />
+      </div>
     </div>
   );
 }
