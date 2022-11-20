@@ -8,10 +8,9 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
   const [isFacedLeft, setIsFacedLeft] = useState<boolean>(true);
   const [isNearGuitar, setIsNearGuitar] = useState<boolean>(false);
-  const windowWidth = window.innerWidth;
   const catSize = 300;
   const guitarSize = 300;
-  const guitarXCoordinate = 200;
+  const [guitarXCoordinate, setGuitarXCoordinate] = useState(200);
   const interactDistance = 100;
   const canvasRef = useRef<HTMLDivElement>(null);
   const catRef = useRef<HTMLDivElement>(null);
@@ -29,14 +28,11 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
       return;
     }
     if (event.code === "ArrowLeft" && catXCoordinate > 0) {
-      setCatXCoordinate(catXCoordinate - 20);
+      setGuitarXCoordinate(guitarXCoordinate + 20);
       setIsFacedLeft(true);
     }
-    if (
-      event.code === "ArrowRight" &&
-      catXCoordinate + catSize < canvasRef.current.offsetWidth
-    ) {
-      setCatXCoordinate(catXCoordinate + 20);
+    if (event.code === "ArrowRight") {
+      setGuitarXCoordinate(guitarXCoordinate - 20);
       setIsFacedLeft(false);
     }
     if (
@@ -57,13 +53,8 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
       ref={canvasRef}
       onKeyDown={handleKeyDown}
       tabIndex={0}
-      className="relative w-[700px] h-screen grid grid-rows-6"
+      className="overflow-hidden relative w-[700px] h-screen grid grid-rows-6"
     >
-      {canvasRef.current?.offsetWidth}
-      {"\n"}
-      {(catRef.current?.offsetLeft as number) +
-        (catRef.current?.offsetWidth as number)}
-      {catXCoordinate + catSize}
       {/* wall */}
       <div className="relative bg-gray-200 row-span-5"></div>
 
@@ -81,22 +72,24 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
           <img className={`${isFacedLeft ? "" : "flipped"}`} src="cat.png" />
         </div>
         {/* guitar situated at the center of the room */}
-        <div
-          className={`absolute bottom-0`}
-          style={{
-            left: `${guitarXCoordinate}px`,
-            width: `${guitarSize}px`,
-          }}
-        >
-          {/* glow */}
-          {isNearGuitar && (
-            <div className="mx-auto mb-[-100%] bg-orange-200/70 w-[200px] h-[200px] rounded-full"></div>
-          )}
-          {/* actual guitar */}
-          <div className="width-[400px]">
-            <img src="guitar.png" />
+        {guitarXCoordinate + guitarSize > 0 && (
+          <div
+            className={`absolute bottom-0`}
+            style={{
+              left: `${guitarXCoordinate}px`,
+              width: `${guitarSize}px`,
+            }}
+          >
+            {/* glow */}
+            {isNearGuitar && (
+              <div className="mx-auto mb-[-100%] bg-orange-200/70 w-[200px] h-[200px] rounded-full"></div>
+            )}
+            {/* actual guitar */}
+            <div className="width-[400px]">
+              <img src="guitar.png" />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
