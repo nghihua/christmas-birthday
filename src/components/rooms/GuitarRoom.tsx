@@ -1,17 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IGuitarRoomProps } from "../../interfaces/rooms.interface";
 import ReactHowler from "react-howler";
+import Item from "../Item";
 
 const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
   setIsMusicPlayed,
 }) => {
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
   const [isFacedLeft, setIsFacedLeft] = useState<boolean>(true);
-  const [isNearGuitar, setIsNearGuitar] = useState<boolean>(false);
+  const [handleKeyDownCallback, setHandleKeyDownCallback] = useState<
+    (keyCode: string) => void
+  >((keyCode: string) => {});
   const catSize = 300;
-  const guitarSize = 300;
-  const [guitarXCoordinate, setGuitarXCoordinate] = useState(200);
-  const interactDistance = 100;
+  const interactDistance = 150;
+  const [guitar, setGuitar] = useState({
+    image: <img src="guitar.png" />,
+    xCoordinate: 200,
+    size: 300,
+  });
   const canvasRef = useRef<HTMLDivElement>(null);
   const catRef = useRef<HTMLDivElement>(null);
 
@@ -23,28 +29,24 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
     };
   }, [canvasRef.current]);
 
+  useEffect(() => {
+    console.log(handleKeyDownCallback);
+  }, [handleKeyDownCallback]);
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (!canvasRef.current) {
       return;
     }
-    if (event.code === "ArrowLeft" && catXCoordinate > 0) {
-      setGuitarXCoordinate(guitarXCoordinate + 20);
+    if (event.code === "ArrowLeft") {
       setIsFacedLeft(true);
+      setGuitar({ ...guitar, xCoordinate: guitar.xCoordinate + 20 });
     }
     if (event.code === "ArrowRight") {
-      setGuitarXCoordinate(guitarXCoordinate - 20);
+      setGuitar({ ...guitar, xCoordinate: guitar.xCoordinate - 20 });
       setIsFacedLeft(false);
     }
-    if (
-      catXCoordinate > guitarXCoordinate - interactDistance &&
-      catXCoordinate < guitarXCoordinate + interactDistance
-    ) {
-      setIsNearGuitar(true);
-      if (event.code === "Enter") {
-        setIsMusicPlayed(true);
-      }
-    } else {
-      setIsNearGuitar(false);
+    if (handleKeyDownCallback) {
+      handleKeyDownCallback(event.code);
     }
   };
 
@@ -53,7 +55,7 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
       ref={canvasRef}
       onKeyDown={handleKeyDown}
       tabIndex={0}
-      className="overflow-hidden relative w-[700px] h-screen grid grid-rows-6"
+      className="overflow-hidden relative w-screen max-w-[700px] h-screen grid grid-rows-6"
     >
       {/* wall */}
       <div className="relative bg-gray-200 row-span-5"></div>
@@ -72,24 +74,16 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
           <img className={`${isFacedLeft ? "" : "flipped"}`} src="cat.png" />
         </div>
         {/* guitar situated at the center of the room */}
-        {guitarXCoordinate + guitarSize > 0 && (
-          <div
-            className={`absolute bottom-0`}
-            style={{
-              left: `${guitarXCoordinate}px`,
-              width: `${guitarSize}px`,
-            }}
-          >
-            {/* glow */}
-            {isNearGuitar && (
-              <div className="mx-auto mb-[-100%] bg-orange-200/70 w-[200px] h-[200px] rounded-full"></div>
-            )}
-            {/* actual guitar */}
-            <div className="width-[400px]">
-              <img src="guitar.png" />
-            </div>
-          </div>
-        )}
+        <Item
+          image={guitar.image}
+          xCoordinate={guitar.xCoordinate}
+          size={guitar.size}
+          isNear={
+            catXCoordinate > guitar.xCoordinate - interactDistance &&
+            catXCoordinate < guitar.xCoordinate + interactDistance
+          }
+          setHandleKeyDownCallback={setHandleKeyDownCallback}
+        />
       </div>
     </div>
   );
