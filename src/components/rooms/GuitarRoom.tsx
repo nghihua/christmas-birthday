@@ -13,17 +13,19 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
   >((keyCode: string) => {});
   const catSize = 300;
   const interactDistance = 150;
-  const [guitar, setGuitar] = useState({
-    image: <img src="guitar.png" />,
-    xCoordinate: 200,
-    size: 300,
-  });
+  const [itemList, setItemList] = useState<
+    { image: React.ReactNode; xCoordinate: number; size: number }[]
+  >([
+    {
+      image: <img src="guitar.png" />,
+      xCoordinate: 200,
+      size: 300,
+    },
+  ]);
   const canvasRef = useRef<HTMLDivElement>(null);
   const catRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // (catRef.current?.offsetLeft as number) +
-    //   (catRef.current?.offsetWidth as number);
     return () => {
       console.log(canvasRef);
     };
@@ -39,10 +41,18 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
     }
     if (event.code === "ArrowLeft") {
       setIsFacedLeft(true);
-      setGuitar({ ...guitar, xCoordinate: guitar.xCoordinate + 20 });
+      setItemList((itemList) =>
+        itemList.map((item) => {
+          return { ...item, xCoordinate: item.xCoordinate + 20 };
+        })
+      );
     }
     if (event.code === "ArrowRight") {
-      setGuitar({ ...guitar, xCoordinate: guitar.xCoordinate - 20 });
+      setItemList((itemList) =>
+        itemList.map((item) => {
+          return { ...item, xCoordinate: item.xCoordinate - 20 };
+        })
+      );
       setIsFacedLeft(false);
     }
     if (handleKeyDownCallback) {
@@ -74,16 +84,18 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
           <img className={`${isFacedLeft ? "" : "flipped"}`} src="cat.png" />
         </div>
         {/* guitar situated at the center of the room */}
-        <Item
-          image={guitar.image}
-          xCoordinate={guitar.xCoordinate}
-          size={guitar.size}
-          isNear={
-            catXCoordinate > guitar.xCoordinate - interactDistance &&
-            catXCoordinate < guitar.xCoordinate + interactDistance
-          }
-          setHandleKeyDownCallback={setHandleKeyDownCallback}
-        />
+        {itemList.map((item) => (
+          <Item
+            image={item.image}
+            xCoordinate={item.xCoordinate}
+            size={item.size}
+            isNear={
+              catXCoordinate > item.xCoordinate - interactDistance &&
+              catXCoordinate < item.xCoordinate + interactDistance
+            }
+            setHandleKeyDownCallback={setHandleKeyDownCallback}
+          />
+        ))}
       </div>
     </div>
   );
