@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactHowler from "react-howler";
-import GuitarRoom from "./components/rooms/GuitarRoom";
+import Canvas from "./components/rooms/Canvas";
 
 function App() {
   const [isMusicPlayed, setIsMusicPlayed] = useState<boolean>(false);
@@ -11,7 +11,7 @@ function App() {
         <ReactHowler src="birthday.mp3" playing={isMusicPlayed} loop />
       </div>
       <div className="flex items-center justify-center">
-        <GuitarRoom setIsMusicPlayed={setIsMusicPlayed} />
+        <Canvas setIsMusicPlayed={setIsMusicPlayed} />
       </div>
     </div>
   );

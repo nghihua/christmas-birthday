@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { IGuitarRoomProps } from "../../interfaces/rooms.interface";
+import { ICanvasProps } from "../../interfaces/rooms.interface";
 import ReactHowler from "react-howler";
 import Item from "../Item";
+import Joystick from "../Joystick";
 
-const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
+const Canvas: React.FunctionComponent<ICanvasProps> = ({
   setIsMusicPlayed,
 }) => {
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
@@ -11,7 +12,7 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
   const [handleKeyDownCallback, setHandleKeyDownCallback] = useState<
     (keyCode: string) => void
   >((keyCode: string) => {});
-  const catSize = 300;
+  const catSize = 200;
   const interactDistance = 150;
   const [itemList, setItemList] = useState<
     { image: React.ReactNode; xCoordinate: number; size: number }[]
@@ -19,7 +20,7 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
     {
       image: <img src="guitar.png" />,
       xCoordinate: 200,
-      size: 300,
+      size: 200,
     },
   ]);
   const canvasRef = useRef<HTMLDivElement>(null);
@@ -97,8 +98,9 @@ const GuitarRoom: React.FunctionComponent<IGuitarRoomProps> = ({
           />
         ))}
       </div>
+      <Joystick />
     </div>
   );
 };
 
-export default GuitarRoom;
+export default Canvas;
