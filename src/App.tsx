@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactHowler from "react-howler";
-import Canvas from "./components/rooms/Canvas";
+import Canvas from "./components/Canvas";
 
 function App() {
   const [isMusicPlayed, setIsMusicPlayed] = useState<boolean>(false);

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ICanvasProps } from "../../interfaces/rooms.interface";
+import { ICanvasProps } from "../interfaces/rooms.interface";
 import ReactHowler from "react-howler";
-import Item from "../Item";
-import Joystick from "../Joystick";
+import Item from "./Item";
+import Joystick from "./Joystick";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({
   setIsMusicPlayed,
@@ -14,6 +14,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({
   >((keyCode: string) => {});
   const catSize = 200;
   const interactDistance = 150;
+  const [backgroundPositionX, setBackgroundPositionX] = useState(0);
   const [itemList, setItemList] = useState<
     { image: React.ReactNode; xCoordinate: number; size: number }[]
   >([
@@ -47,6 +48,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({
           return { ...item, xCoordinate: item.xCoordinate + 20 };
         })
       );
+      setBackgroundPositionX(backgroundPositionX + 20);
     }
     if (event.code === "ArrowRight") {
       setItemList((itemList) =>
@@ -54,6 +56,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({
           return { ...item, xCoordinate: item.xCoordinate - 20 };
         })
       );
+      setBackgroundPositionX(backgroundPositionX - 20);
       setIsFacedLeft(false);
     }
     if (handleKeyDownCallback) {
@@ -66,10 +69,21 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({
       ref={canvasRef}
       onKeyDown={handleKeyDown}
       tabIndex={0}
-      className="overflow-hidden relative w-screen max-w-[700px] h-screen grid grid-rows-6"
+      className="overflow-hidden relative w-screen max-w-[700px] h-[50vh] grid grid-rows-6"
     >
       {/* wall */}
-      <div className="relative bg-gray-200 row-span-5"></div>
+      <div
+        className="relative row-span-5 h-full bg-cover bg-repeat-x"
+        style={{
+          backgroundImage:
+            "url(https://t3.ftcdn.net/jpg/03/57/11/70/240_F_357117060_yV3A2INxBDKlab5KSEHFUEtzokb5IiJ6.jpg)",
+          backgroundPositionX: `${backgroundPositionX}px`,
+        }}
+      ></div>
+      {/* <img
+        src="https://t3.ftcdn.net/jpg/03/57/11/70/240_F_357117060_yV3A2INxBDKlab5KSEHFUEtzokb5IiJ6.jpg"
+        className="relative row-span-5 h-full object-cover"
+      /> */}
 
       {/* floor */}
       <div className="bg-gray-100">
