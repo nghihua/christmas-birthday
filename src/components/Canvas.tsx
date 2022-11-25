@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ICanvasProps } from "../interfaces/rooms.interface";
 import ReactHowler from "react-howler";
-import Item from "./Item";
+import Guitar from "./Guitar";
 import Joystick from "./Joystick";
 
-const Canvas: React.FunctionComponent<ICanvasProps> = ({
-  setIsMusicPlayed,
-}) => {
+const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
   const [isFacedLeft, setIsFacedLeft] = useState<boolean>(true);
   const [handleKeyDownCallback, setHandleKeyDownCallback] = useState<
@@ -15,17 +13,10 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({
   const catSize = 200;
   const interactDistance = 150;
   const [backgroundPositionX, setBackgroundPositionX] = useState(0);
-  const [itemList, setItemList] = useState<
-    { image: React.ReactNode; xCoordinate: number; size: number }[]
-  >([
-    {
-      image: <img src="guitar.png" />,
-      xCoordinate: 200,
-      size: 200,
-    },
-  ]);
+  const offsetCoordinateRef = useRef(0);
   const canvasRef = useRef<HTMLDivElement>(null);
   const catRef = useRef<HTMLDivElement>(null);
+  const [guitarXCoordinate, setGuitarXCoordinate] = useState(400);
 
   useEffect(() => {
     return () => {
@@ -33,29 +24,17 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({
     };
   }, [canvasRef.current]);
 
-  useEffect(() => {
-    console.log(handleKeyDownCallback);
-  }, [handleKeyDownCallback]);
-
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (!canvasRef.current) {
       return;
     }
     if (event.code === "ArrowLeft") {
       setIsFacedLeft(true);
-      setItemList((itemList) =>
-        itemList.map((item) => {
-          return { ...item, xCoordinate: item.xCoordinate + 20 };
-        })
-      );
+      setGuitarXCoordinate(guitarXCoordinate + 20);
       setBackgroundPositionX(backgroundPositionX + 20);
     }
     if (event.code === "ArrowRight") {
-      setItemList((itemList) =>
-        itemList.map((item) => {
-          return { ...item, xCoordinate: item.xCoordinate - 20 };
-        })
-      );
+      setGuitarXCoordinate(guitarXCoordinate - 20);
       setBackgroundPositionX(backgroundPositionX - 20);
       setIsFacedLeft(false);
     }
@@ -99,18 +78,11 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({
           <img className={`${isFacedLeft ? "" : "flipped"}`} src="cat.png" />
         </div>
         {/* guitar situated at the center of the room */}
-        {itemList.map((item) => (
-          <Item
-            image={item.image}
-            xCoordinate={item.xCoordinate}
-            size={item.size}
-            isNear={
-              catXCoordinate > item.xCoordinate - interactDistance &&
-              catXCoordinate < item.xCoordinate + interactDistance
-            }
-            setHandleKeyDownCallback={setHandleKeyDownCallback}
-          />
-        ))}
+        <Guitar
+          interactDistance={interactDistance}
+          xCoordinate={guitarXCoordinate}
+          setHandleKeyDownCallback={setHandleKeyDownCallback}
+        />
       </div>
       <Joystick />
     </div>
