@@ -13,7 +13,6 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const catSize = 200;
   const interactDistance = 150;
   const [backgroundPositionX, setBackgroundPositionX] = useState(0);
-  const offsetCoordinateRef = useRef(0);
   const canvasRef = useRef<HTMLDivElement>(null);
   const catRef = useRef<HTMLDivElement>(null);
   const [guitarXCoordinate, setGuitarXCoordinate] = useState(400);
@@ -23,6 +22,10 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
       console.log(canvasRef);
     };
   }, [canvasRef.current]);
+
+  const focusOnCanvas = () => {
+    canvasRef.current?.focus();
+  };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (!canvasRef.current) {
@@ -82,6 +85,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
           interactDistance={interactDistance}
           xCoordinate={guitarXCoordinate}
           setHandleKeyDownCallback={setHandleKeyDownCallback}
+          focusOnCanvas={focusOnCanvas}
         />
       </div>
       <Joystick />
