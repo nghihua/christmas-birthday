@@ -8,8 +8,8 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
   const [isFacedLeft, setIsFacedLeft] = useState<boolean>(true);
   const [handleKeyDownCallback, setHandleKeyDownCallback] = useState<
-    (keyCode: string) => void
-  >((keyCode: string) => {});
+    () => void
+  >(() => {});
   const catSize = 200;
   const interactDistance = 150;
   const [backgroundPositionX, setBackgroundPositionX] = useState(0);
@@ -27,22 +27,40 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
     canvasRef.current?.focus();
   };
 
+  const handleLeft = () => {
+    setIsFacedLeft(true);
+    setGuitarXCoordinate((oldGuitarXCoordinate) => oldGuitarXCoordinate + 20);
+    setBackgroundPositionX(
+      (oldBackgroundPositionX) => oldBackgroundPositionX + 20
+    );
+  };
+
+  const handleRight = () => {
+    setIsFacedLeft(false);
+    setGuitarXCoordinate((oldGuitarXCoordinate) => oldGuitarXCoordinate - 20);
+    setBackgroundPositionX(
+      (oldBackgroundPositionX) => oldBackgroundPositionX - 20
+    );
+  };
+
+  const handleEnter = () => {
+    if (handleKeyDownCallback) {
+      handleKeyDownCallback();
+    }
+  };
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (!canvasRef.current) {
       return;
     }
     if (event.code === "ArrowLeft") {
-      setIsFacedLeft(true);
-      setGuitarXCoordinate(guitarXCoordinate + 20);
-      setBackgroundPositionX(backgroundPositionX + 20);
+      handleLeft();
     }
     if (event.code === "ArrowRight") {
-      setGuitarXCoordinate(guitarXCoordinate - 20);
-      setBackgroundPositionX(backgroundPositionX - 20);
-      setIsFacedLeft(false);
+      handleRight();
     }
-    if (handleKeyDownCallback) {
-      handleKeyDownCallback(event.code);
+    if (event.code === "Enter") {
+      handleEnter();
     }
   };
 
@@ -88,7 +106,11 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
           focusOnCanvas={focusOnCanvas}
         />
       </div>
-      <Joystick />
+      <Joystick
+        handleClickLeft={handleLeft}
+        handleClickRight={handleRight}
+        handleClickSelect={handleEnter}
+      />
     </div>
   );
 };

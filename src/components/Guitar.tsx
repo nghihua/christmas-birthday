@@ -13,9 +13,7 @@ import { TiCancel } from "react-icons/ti";
 interface IGuitarProps {
   interactDistance: number;
   xCoordinate: number;
-  setHandleKeyDownCallback: React.Dispatch<
-    React.SetStateAction<(keyCode: string) => void>
-  >;
+  setHandleKeyDownCallback: React.Dispatch<React.SetStateAction<() => void>>;
   focusOnCanvas: () => void;
 }
 
@@ -52,20 +50,16 @@ const Guitar: FunctionComponent<IGuitarProps> = ({
     if (isNear) {
       itemRef.current?.focus();
       setHandleKeyDownCallback(
-        (oldHandle: (keyCode: string) => void) => handleKeyDownCallback
+        (oldHandle: () => void) => handleKeyDownCallback
       );
     } else {
       itemRef.current?.blur();
-      setHandleKeyDownCallback(
-        (oldHandle: (keyCode: string) => void) => (keyCode: string) => {}
-      );
+      setHandleKeyDownCallback((oldHandle: () => void) => () => {});
     }
   }, [isNear]);
 
-  const handleKeyDownCallback = (keyCode: string) => {
-    if (keyCode === "Enter") {
-      setShowModal(true);
-    }
+  const handleKeyDownCallback = () => {
+    setShowModal(true);
   };
 
   const handleCloseModal = () => {
