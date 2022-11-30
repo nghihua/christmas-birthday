@@ -3,6 +3,7 @@ import { ICanvasProps } from "../interfaces/rooms.interface";
 import ReactHowler from "react-howler";
 import Guitar from "./Guitar";
 import Joystick from "./Joystick";
+import Snowfall from "react-snowfall";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
@@ -69,24 +70,22 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
       ref={canvasRef}
       onKeyDown={handleKeyDown}
       tabIndex={0}
-      className="overflow-hidden relative w-screen max-w-[700px] h-[50vh] grid grid-rows-6"
+      className="overflow-hidden relative sm:max-w-[700px] w-screen sm:h-[70vh] h-screen sm:rounded-lg"
     >
-      {/* wall */}
+      {/* backdrop */}
       <div
-        className="relative row-span-5 h-full bg-cover bg-repeat-x"
+        className="absolute top-0 w-full h-full bg-cover bg-repeat-x"
         style={{
           backgroundImage:
-            "url(https://t3.ftcdn.net/jpg/03/57/11/70/240_F_357117060_yV3A2INxBDKlab5KSEHFUEtzokb5IiJ6.jpg)",
+            "url(https://i.ibb.co/F6yscH1/winter-background.jpg)",
           backgroundPositionX: `${backgroundPositionX}px`,
         }}
-      ></div>
-      {/* <img
-        src="https://t3.ftcdn.net/jpg/03/57/11/70/240_F_357117060_yV3A2INxBDKlab5KSEHFUEtzokb5IiJ6.jpg"
-        className="relative row-span-5 h-full object-cover"
-      /> */}
+      >
+        <Snowfall />
+      </div>
 
       {/* floor */}
-      <div className="bg-gray-100">
+      <div className="absolute bottom-10">
         {/* cat situated at the end of wall */}
         <div
           ref={catRef}

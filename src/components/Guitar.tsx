@@ -88,7 +88,7 @@ const Guitar: FunctionComponent<IGuitarProps> = ({
         )}
       </div>
       {showModal && (
-        <div className="bg-white p-3 rounded-md absolute top-[50%] left-[50%]">
+        <div className="bg-white p-3 rounded-md fixed top-[50%] left-[50%]">
           <div className="flex justify-center items-center gap-2">
             <div className="">CHOOSE YOUR MUSIC</div>
             <button onClick={handleCloseModal}>
