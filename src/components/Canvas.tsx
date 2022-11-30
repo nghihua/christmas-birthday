@@ -70,40 +70,42 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
       ref={canvasRef}
       onKeyDown={handleKeyDown}
       tabIndex={0}
-      className="overflow-hidden relative sm:max-w-[700px] w-screen sm:h-[70vh] h-screen sm:rounded-lg"
+      className="overflow-hidden relative sm:max-w-[700px] w-screen sm:h-[70vh] h-screen sm:rounded-lg flex flex-col"
     >
-      {/* backdrop */}
-      <div
-        className="absolute top-0 w-full h-full bg-cover bg-repeat-x"
-        style={{
-          backgroundImage:
-            "url(https://i.ibb.co/F6yscH1/winter-background.jpg)",
-          backgroundPositionX: `${backgroundPositionX}px`,
-        }}
-      >
-        <Snowfall />
-      </div>
-
-      {/* floor */}
-      <div className="absolute bottom-10">
-        {/* cat situated at the end of wall */}
+      <div className="h-full relative">
+        {/* backdrop */}
         <div
-          ref={catRef}
-          className={`absolute bottom-0 z-10`}
+          className="absolute top-0 w-full h-full bg-cover bg-repeat-x"
           style={{
-            left: `${catXCoordinate}px`,
-            width: `${catSize}px`,
+            backgroundImage:
+              "url(https://i.ibb.co/F6yscH1/winter-background.jpg)",
+            backgroundPositionX: `${backgroundPositionX}px`,
           }}
         >
-          <img className={`${isFacedLeft ? "" : "flipped"}`} src="cat.png" />
+          <Snowfall />
         </div>
-        {/* guitar situated at the center of the room */}
-        <Guitar
-          interactDistance={interactDistance}
-          xCoordinate={guitarXCoordinate}
-          setHandleKeyDownCallback={setHandleKeyDownCallback}
-          focusOnCanvas={focusOnCanvas}
-        />
+
+        {/* floor */}
+        <div className="absolute bottom-10">
+          {/* cat situated at the end of wall */}
+          <div
+            ref={catRef}
+            className={`absolute bottom-0 z-10`}
+            style={{
+              left: `${catXCoordinate}px`,
+              width: `${catSize}px`,
+            }}
+          >
+            <img className={`${isFacedLeft ? "" : "flipped"}`} src="cat.png" />
+          </div>
+          {/* guitar situated at the center of the room */}
+          <Guitar
+            interactDistance={interactDistance}
+            xCoordinate={guitarXCoordinate}
+            setHandleKeyDownCallback={setHandleKeyDownCallback}
+            focusOnCanvas={focusOnCanvas}
+          />
+        </div>
       </div>
       <Joystick
         handleClickLeft={handleLeft}
