@@ -9,6 +9,7 @@ import { AiFillCloseSquare } from "react-icons/ai";
 import ReactHowler from "react-howler";
 import { BsMusicNote } from "react-icons/bs";
 import { TiCancel } from "react-icons/ti";
+import Modal from "./Modal";
 
 interface IPianoProps {
   interactDistance: number;
@@ -88,15 +89,10 @@ const Piano: FunctionComponent<IPianoProps> = ({
         )}
       </div>
       {showModal && (
-        <div className="h-full w-full z-[30] bg-black/30 absolute top-0 left-0 flex justify-center items-center">
-          <div className="bg-white p-3 rounded-md">
-            <div className="flex justify-center items-center gap-2">
-              <div className="">CHOOSE YOUR MUSIC</div>
-              <button onClick={handleCloseModal}>
-                <AiFillCloseSquare color="#1f5b33" size={20} />
-              </button>
-            </div>
-            <hr className="my-2" />
+        <Modal
+          title="CHOOSE YOUR MUSIC"
+          handleCloseModal={handleCloseModal}
+          content={
             <div className="flex flex-col">
               {songList.map((song) => (
                 <button
@@ -120,8 +116,8 @@ const Piano: FunctionComponent<IPianoProps> = ({
                 Turn off
               </button>
             </div>
-          </div>
-        </div>
+          }
+        />
       )}
       <div className="hidden">
         <ReactHowler
