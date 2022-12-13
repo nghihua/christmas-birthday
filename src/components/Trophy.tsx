@@ -19,7 +19,7 @@ const Trophy: FunctionComponent<ITrophyProps> = ({
   const image = <img src="trophy.png" />;
   const size = 150;
   const [isNear, setIsNear] = useState(false);
-  const [showGif, setShowGif] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     if (
@@ -45,11 +45,11 @@ const Trophy: FunctionComponent<ITrophyProps> = ({
   }, [isNear]);
 
   const handleKeyDownCallback = () => {
-    setShowGif(true);
+    setShowMessage(true);
   };
 
-  const handleCloseModal = () => {
-    setShowGif(false);
+  const handleCloseMessage = () => {
+    setShowMessage(false);
     focusOnCanvas();
   };
   return (
@@ -71,7 +71,7 @@ const Trophy: FunctionComponent<ITrophyProps> = ({
           </div>
         )}
       </div>
-      {showGif && (
+      {showMessage && (
         <>
           <PaperModal
             title="Notes"
@@ -82,7 +82,7 @@ const Trophy: FunctionComponent<ITrophyProps> = ({
                 src="https://stickershop.line-scdn.net/stickershop/v1/product/1242410/LINEStorePC/main.png"
               />
             }
-            handleCloseModal={() => setShowGif(false)}
+            handleCloseModal={handleCloseMessage}
           />
         </>
       )}

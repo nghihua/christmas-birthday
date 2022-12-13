@@ -57,6 +57,10 @@ const Foodstall: FunctionComponent<IFoodstallProps> = ({
     setShowModal(false);
     focusOnCanvas();
   };
+  const handleCloseMessage = () => {
+    setShowMessage(false);
+    focusOnCanvas();
+  };
   return (
     <>
       <div>
@@ -122,7 +126,7 @@ const Foodstall: FunctionComponent<IFoodstallProps> = ({
                 }
               />
             }
-            handleCloseModal={() => setShowMessage(false)}
+            handleCloseModal={handleCloseMessage}
           />
         </>
       )}

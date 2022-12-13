@@ -1,3 +1,7 @@
+export interface IReminderProps {
+  callback: () => void;
+}
+
 export interface IComponentProps {
   interactDistance: number;
   xCoordinate: number;

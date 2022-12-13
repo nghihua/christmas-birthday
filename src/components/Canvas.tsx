@@ -7,6 +7,7 @@ import Foodstall from "./Foodstall";
 import Trophy from "./Trophy";
 import Drinkstall from "./Drinkstall";
 import ShootingStar from "./ShootingStar";
+import FocusReminder from "./FocusReminder";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
@@ -24,6 +25,8 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [drinkstallXCoordinate, setDrinkstallXCoordinate] = useState(1600);
   const [trophyXCoordinate, setTrophyXCoordinate] = useState(2800);
   const [shootingStarXCoordinate, setShootingStarXCoordinate] = useState(3400);
+
+  const [showFocusReminder, setShowFocusReminder] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -100,6 +103,12 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
       ref={canvasRef}
       onKeyDown={handleKeyDown}
       tabIndex={0}
+      onBlur={() => {
+        setShowFocusReminder(true);
+      }}
+      onFocus={() => {
+        setShowFocusReminder(false);
+      }}
       className="overflow-hidden relative md:max-w-[700px] w-screen md:h-[70vh] h-screen sm:rounded-lg flex flex-col"
     >
       <div className="h-full relative">
@@ -164,6 +173,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
         handleClickRight={handleRight}
         handleClickSelect={handleEnter}
       />
+      {showFocusReminder && <FocusReminder callback={focusOnCanvas} />}
     </div>
   );
 };

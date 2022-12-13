@@ -49,6 +49,10 @@ const ShootingStar: FunctionComponent<IShootingStarProps> = ({
     setShowModal(false);
     focusOnCanvas();
   };
+  const handleCloseMessage = () => {
+    setShowMessage(false);
+    focusOnCanvas();
+  };
   return (
     <>
       <div>
@@ -102,7 +106,7 @@ const ShootingStar: FunctionComponent<IShootingStarProps> = ({
                 src="https://images.squarespace-cdn.com/content/v1/5953f2db37c58112898b2293/1601649592996-RXQOAJG8OPM0TZOUICAN/crystal-ball-flicker-WHITEBG-anneleedesigns.gif"
               />
             }
-            handleCloseModal={() => setShowMessage(false)}
+            handleCloseModal={handleCloseMessage}
           />
         </>
       )}

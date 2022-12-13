@@ -14,7 +14,7 @@ export const drinkList: IDrinkItem[] = [
     value: "tea",
     img: "https://www.ashigaracha.co.jp/html/template/ashigaracha/assets/img/page/hti01.png",
     content:
-      "Em có thích uống trà đâu, chọn cho vui đúng hong? Nhưng thôi nào mình vô SG đi trà đạo i.",
+      "Em có thích uống trà đâu, chọn cho vui đúng hong? Nhưng thôi nào mình vô SG đi trà đạo nha.",
     quote:
       "You value harmony and inner peace, enjoy exploring new places and cultures.",
   },
