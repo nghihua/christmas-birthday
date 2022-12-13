@@ -6,6 +6,7 @@ import Snowfall from "react-snowfall";
 import Foodstall from "./Foodstall";
 import Trophy from "./Trophy";
 import Drinkstall from "./Drinkstall";
+import ShootingStar from "./ShootingStar";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
@@ -22,6 +23,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [foodstallXCoordinate, setFoodstallXCoordinate] = useState(1000);
   const [drinkstallXCoordinate, setDrinkstallXCoordinate] = useState(1600);
   const [trophyXCoordinate, setTrophyXCoordinate] = useState(2800);
+  const [shootingStarXCoordinate, setShootingStarXCoordinate] = useState(3400);
 
   useEffect(() => {
     return () => {
@@ -46,6 +48,9 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
     setDrinkstallXCoordinate(
       (oldDrinkstallXCoordinate) => oldDrinkstallXCoordinate + 20
     );
+    setShootingStarXCoordinate(
+      (oldShootingStarXCoordinate) => oldShootingStarXCoordinate + 20
+    );
     setBackgroundPositionX(
       (oldBackgroundPositionX) => oldBackgroundPositionX + 20
     );
@@ -60,6 +65,9 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
     );
     setDrinkstallXCoordinate(
       (oldDrinkstallXCoordinate) => oldDrinkstallXCoordinate - 20
+    );
+    setShootingStarXCoordinate(
+      (oldShootingStarXCoordinate) => oldShootingStarXCoordinate - 20
     );
     setBackgroundPositionX(
       (oldBackgroundPositionX) => oldBackgroundPositionX - 20
@@ -141,6 +149,12 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
         <Drinkstall
           interactDistance={interactDistance}
           xCoordinate={drinkstallXCoordinate}
+          setHandleKeyDownCallback={setHandleKeyDownCallback}
+          focusOnCanvas={focusOnCanvas}
+        />
+        <ShootingStar
+          interactDistance={interactDistance}
+          xCoordinate={shootingStarXCoordinate}
           setHandleKeyDownCallback={setHandleKeyDownCallback}
           focusOnCanvas={focusOnCanvas}
         />

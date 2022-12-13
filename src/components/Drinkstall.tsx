@@ -112,7 +112,7 @@ const Drinkstall: FunctionComponent<IDrinkstallProps> = ({
       {showMessage && selectedFood && (
         <>
           <PaperModal
-            title="Notes"
+            title="Kính mời quý khách"
             extraContent={
               <div className="flex flex-col gap-2">
                 <img className="w-[200px] mx-auto" src={selectedFood.img} />

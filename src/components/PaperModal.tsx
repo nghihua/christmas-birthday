@@ -16,7 +16,7 @@ const PaperModal: React.FunctionComponent<IPaperModalProps> = ({
           className="absolute z-[-10] h-full w-full rotate-6"
           src="https://www.pngkit.com/png/full/21-219902_torn-paper-png.png"
         />
-        <div className="p-3">
+        <div className="py-5 px-3">
           <div className="flex justify-center items-center gap-2">
             <div className="text-2xl font-pangolin">{title}</div>
             <button onClick={handleCloseModal}>

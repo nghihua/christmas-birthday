@@ -112,7 +112,7 @@ const Foodstall: FunctionComponent<IFoodstallProps> = ({
       {showMessage && selectedFood && (
         <>
           <PaperModal
-            title="Notes"
+            title="Kính mời quý khách"
             content="Đồ ăn tới rồi nè. Chúc em một năm mới nhiều điều ngọt ngào như món này nha."
             extraContent={
               <img

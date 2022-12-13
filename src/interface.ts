@@ -1,18 +1,18 @@
-// Piano
-export interface IPianoProps {
+export interface IComponentProps {
   interactDistance: number;
   xCoordinate: number;
   setHandleKeyDownCallback: React.Dispatch<React.SetStateAction<() => void>>;
   focusOnCanvas: () => void;
 }
 
+// Piano
+export interface IPianoProps extends IComponentProps {}
+
 // Trophy
-export interface ITrophyProps {
-  interactDistance: number;
-  xCoordinate: number;
-  setHandleKeyDownCallback: React.Dispatch<React.SetStateAction<() => void>>;
-  focusOnCanvas: () => void;
-}
+export interface ITrophyProps extends IComponentProps {}
+
+// Desk
+export interface IShootingStarProps extends IComponentProps {}
 
 // Drink Stall
 export interface IDrinkItem {
@@ -22,12 +22,7 @@ export interface IDrinkItem {
   content: string;
   quote: string;
 }
-export interface IDrinkstallProps {
-  interactDistance: number;
-  xCoordinate: number;
-  setHandleKeyDownCallback: React.Dispatch<React.SetStateAction<() => void>>;
-  focusOnCanvas: () => void;
-}
+export interface IDrinkstallProps extends IComponentProps {}
 
 // Food Stall
 export interface IFoodItem {
@@ -35,12 +30,7 @@ export interface IFoodItem {
   value: string;
   img: string;
 }
-export interface IFoodstallProps {
-  interactDistance: number;
-  xCoordinate: number;
-  setHandleKeyDownCallback: React.Dispatch<React.SetStateAction<() => void>>;
-  focusOnCanvas: () => void;
-}
+export interface IFoodstallProps extends IComponentProps {}
 
 // Joystick
 export interface IJoystickProps {
