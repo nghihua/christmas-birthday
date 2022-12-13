@@ -11,24 +11,23 @@ import { BsMusicNote } from "react-icons/bs";
 import { TiCancel } from "react-icons/ti";
 import PaperModal from "./PaperModal";
 
-interface IBookProps {
+interface ITrophyProps {
   interactDistance: number;
   xCoordinate: number;
   setHandleKeyDownCallback: React.Dispatch<React.SetStateAction<() => void>>;
   focusOnCanvas: () => void;
 }
 
-const Book: FunctionComponent<IBookProps> = ({
+const Trophy: FunctionComponent<ITrophyProps> = ({
   interactDistance,
   xCoordinate,
   setHandleKeyDownCallback,
   focusOnCanvas,
 }) => {
   const itemRef = useRef<HTMLDivElement>(null);
-  const image = <img src="book.png" />;
+  const image = <img src="trophy.png" />;
   const size = 150;
   const glowSize = 150;
-  const gifSize = 400;
   const [isNear, setIsNear] = useState(false);
   const [showGif, setShowGif] = useState(false);
 
@@ -116,4 +115,4 @@ const Book: FunctionComponent<IBookProps> = ({
   );
 };
 
-export default Book;
+export default Trophy;

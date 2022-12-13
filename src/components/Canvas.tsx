@@ -4,8 +4,8 @@ import ReactHowler from "react-howler";
 import Guitar from "./Piano";
 import Joystick from "./Joystick";
 import Snowfall from "react-snowfall";
-import Passport from "./Passport";
-import Book from "./Book";
+import Foodstall from "./Foodstall";
+import Trophy from "./Trophy";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
@@ -19,7 +19,9 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const canvasRef = useRef<HTMLDivElement>(null);
   const catRef = useRef<HTMLDivElement>(null);
   const [guitarXCoordinate, setGuitarXCoordinate] = useState(400);
-  const [bookXCoordinate, setBookXCoordinate] = useState(800);
+  const [foodstallXCoordinate, setFoodstallXCoordinate] = useState(1000);
+  const [trophyXCoordinate, setTrophyXCoordinate] = useState(1800);
+
   useEffect(() => {
     return () => {
       console.log(canvasRef);
@@ -32,8 +34,14 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
 
   const handleLeft = () => {
     setIsFacedLeft(true);
+    if (backgroundPositionX >= 0) {
+      return;
+    }
     setGuitarXCoordinate((oldGuitarXCoordinate) => oldGuitarXCoordinate + 20);
-    setBookXCoordinate((oldBookXCoordinate) => oldBookXCoordinate + 20);
+    setTrophyXCoordinate((oldTrophyXCoordinate) => oldTrophyXCoordinate + 20);
+    setFoodstallXCoordinate(
+      (oldFoodstallXCoordinate) => oldFoodstallXCoordinate + 20
+    );
     setBackgroundPositionX(
       (oldBackgroundPositionX) => oldBackgroundPositionX + 20
     );
@@ -42,7 +50,10 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const handleRight = () => {
     setIsFacedLeft(false);
     setGuitarXCoordinate((oldGuitarXCoordinate) => oldGuitarXCoordinate - 20);
-    setBookXCoordinate((oldBookXCoordinate) => oldBookXCoordinate - 20);
+    setTrophyXCoordinate((oldTrophyXCoordinate) => oldTrophyXCoordinate - 20);
+    setFoodstallXCoordinate(
+      (oldFoodstallXCoordinate) => oldFoodstallXCoordinate - 20
+    );
     setBackgroundPositionX(
       (oldBackgroundPositionX) => oldBackgroundPositionX - 20
     );
@@ -108,9 +119,15 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
           setHandleKeyDownCallback={setHandleKeyDownCallback}
           focusOnCanvas={focusOnCanvas}
         />
-        <Book
+        <Trophy
           interactDistance={interactDistance}
-          xCoordinate={bookXCoordinate}
+          xCoordinate={trophyXCoordinate}
+          setHandleKeyDownCallback={setHandleKeyDownCallback}
+          focusOnCanvas={focusOnCanvas}
+        />
+        <Foodstall
+          interactDistance={interactDistance}
+          xCoordinate={foodstallXCoordinate}
           setHandleKeyDownCallback={setHandleKeyDownCallback}
           focusOnCanvas={focusOnCanvas}
         />
