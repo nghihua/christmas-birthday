@@ -94,7 +94,7 @@ const Trophy: FunctionComponent<ITrophyProps> = ({
           <PaperModal
             title="Notes"
             content="Chúc em tuổi mới học được nhiều điều hay, thành tích tốt, ngày càng xuất sắc"
-            img={
+            extraContent={
               <img
                 className="w-[200px]"
                 src="https://stickershop.line-scdn.net/stickershop/v1/product/1242410/LINEStorePC/main.png"

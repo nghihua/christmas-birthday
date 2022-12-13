@@ -5,14 +5,14 @@ import Typewriter from "typewriter-effect";
 interface IPaperModalProps {
   title: string;
   content: string;
-  img: React.ReactNode;
+  extraContent: React.ReactNode;
   handleCloseModal: () => void;
 }
 
 const PaperModal: React.FunctionComponent<IPaperModalProps> = ({
   title,
   content,
-  img,
+  extraContent,
   handleCloseModal,
 }) => {
   return (
@@ -45,7 +45,7 @@ const PaperModal: React.FunctionComponent<IPaperModalProps> = ({
                 />
               </p>
               <div className="my-5 flex justify-center items-center">
-                {img && img}
+                {extraContent && extraContent}
               </div>
             </div>
           </div>

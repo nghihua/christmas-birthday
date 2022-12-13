@@ -6,6 +6,7 @@ import Joystick from "./Joystick";
 import Snowfall from "react-snowfall";
 import Foodstall from "./Foodstall";
 import Trophy from "./Trophy";
+import Drinkstall from "./Drinkstall";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
@@ -20,7 +21,8 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const catRef = useRef<HTMLDivElement>(null);
   const [guitarXCoordinate, setGuitarXCoordinate] = useState(400);
   const [foodstallXCoordinate, setFoodstallXCoordinate] = useState(1000);
-  const [trophyXCoordinate, setTrophyXCoordinate] = useState(1800);
+  const [drinkstallXCoordinate, setDrinkstallXCoordinate] = useState(1600);
+  const [trophyXCoordinate, setTrophyXCoordinate] = useState(2800);
 
   useEffect(() => {
     return () => {
@@ -42,6 +44,9 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
     setFoodstallXCoordinate(
       (oldFoodstallXCoordinate) => oldFoodstallXCoordinate + 20
     );
+    setDrinkstallXCoordinate(
+      (oldDrinkstallXCoordinate) => oldDrinkstallXCoordinate + 20
+    );
     setBackgroundPositionX(
       (oldBackgroundPositionX) => oldBackgroundPositionX + 20
     );
@@ -53,6 +58,9 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
     setTrophyXCoordinate((oldTrophyXCoordinate) => oldTrophyXCoordinate - 20);
     setFoodstallXCoordinate(
       (oldFoodstallXCoordinate) => oldFoodstallXCoordinate - 20
+    );
+    setDrinkstallXCoordinate(
+      (oldDrinkstallXCoordinate) => oldDrinkstallXCoordinate - 20
     );
     setBackgroundPositionX(
       (oldBackgroundPositionX) => oldBackgroundPositionX - 20
@@ -128,6 +136,12 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
         <Foodstall
           interactDistance={interactDistance}
           xCoordinate={foodstallXCoordinate}
+          setHandleKeyDownCallback={setHandleKeyDownCallback}
+          focusOnCanvas={focusOnCanvas}
+        />
+        <Drinkstall
+          interactDistance={interactDistance}
+          xCoordinate={drinkstallXCoordinate}
           setHandleKeyDownCallback={setHandleKeyDownCallback}
           focusOnCanvas={focusOnCanvas}
         />

@@ -6,7 +6,6 @@ import {
   useState,
 } from "react";
 import { IoFastFoodOutline } from "react-icons/io5";
-import { TiCancel } from "react-icons/ti";
 import LoadingModal from "./LoadingModal";
 import Modal from "./Modal";
 import PaperModal from "./PaperModal";
@@ -152,7 +151,7 @@ const Foodstall: FunctionComponent<IFoodstallProps> = ({
           <PaperModal
             title="Notes"
             content="Đồ ăn tới rồi nè. Chúc em một năm mới nhiều điều ngọt ngào như món này nha."
-            img={
+            extraContent={
               <img
                 className="w-[200px]"
                 src={
