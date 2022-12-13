@@ -5,18 +5,9 @@ import {
   useRef,
   useState,
 } from "react";
-import { AiFillCloseSquare } from "react-icons/ai";
-import ReactHowler from "react-howler";
-import { BsMusicNote } from "react-icons/bs";
-import { TiCancel } from "react-icons/ti";
 import PaperModal from "./PaperModal";
-
-interface ITrophyProps {
-  interactDistance: number;
-  xCoordinate: number;
-  setHandleKeyDownCallback: React.Dispatch<React.SetStateAction<() => void>>;
-  focusOnCanvas: () => void;
-}
+import NameTag from "./NameTag";
+import { ITrophyProps } from "../interface";
 
 const Trophy: FunctionComponent<ITrophyProps> = ({
   interactDistance,
@@ -27,7 +18,6 @@ const Trophy: FunctionComponent<ITrophyProps> = ({
   const itemRef = useRef<HTMLDivElement>(null);
   const image = <img src="trophy.png" />;
   const size = 150;
-  const glowSize = 150;
   const [isNear, setIsNear] = useState(false);
   const [showGif, setShowGif] = useState(false);
 
@@ -75,15 +65,7 @@ const Trophy: FunctionComponent<ITrophyProps> = ({
             }}
           >
             {/* glow */}
-            {isNear && (
-              <div
-                className="transition-all mx-auto mb-[-100%] bg-orange-200/70 rounded-full"
-                style={{
-                  width: glowSize + "px",
-                  height: glowSize + "px",
-                }}
-              ></div>
-            )}
+            {isNear && <NameTag content="Cúp" />}
             {/* actual Book */}
             <div className="width-[400px]">{image}</div>
           </div>

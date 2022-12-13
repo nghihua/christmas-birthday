@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { AiFillCloseSquare } from "react-icons/ai";
+import React, { useEffect } from "react";
+import { ILoadingModalProps } from "../interface";
 
-interface IPaperModalProps {
-  content: React.ReactNode;
-  img: React.ReactNode;
-  duration: number;
-  callback: Function;
-  toggleModal: Function;
-}
-
-const LoadingModal: React.FunctionComponent<IPaperModalProps> = ({
+const LoadingModal: React.FunctionComponent<ILoadingModalProps> = ({
   content,
   duration,
   img,

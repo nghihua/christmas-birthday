@@ -1,13 +1,7 @@
 import * as React from "react";
 import { AiFillCloseSquare } from "react-icons/ai";
 import Typewriter from "typewriter-effect";
-
-interface IPaperModalProps {
-  title: string;
-  content: string;
-  extraContent: React.ReactNode;
-  handleCloseModal: () => void;
-}
+import { IPaperModalProps } from "../interface";
 
 const PaperModal: React.FunctionComponent<IPaperModalProps> = ({
   title,

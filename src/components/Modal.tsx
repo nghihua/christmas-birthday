@@ -1,11 +1,6 @@
 import * as React from "react";
 import { AiFillCloseSquare } from "react-icons/ai";
-
-interface IModalProps {
-  title: string;
-  content: React.ReactNode;
-  handleCloseModal: () => void;
-}
+import { IModalProps } from "../interface";
 
 const Modal: React.FunctionComponent<IModalProps> = ({
   title,

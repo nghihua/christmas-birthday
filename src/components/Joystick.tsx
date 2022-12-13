@@ -4,12 +4,7 @@ import {
   BsFillArrowRightSquareFill,
   BsFillHandIndexFill,
 } from "react-icons/bs";
-
-interface IJoystickProps {
-  handleClickLeft: () => void;
-  handleClickRight: () => void;
-  handleClickSelect: () => void;
-}
+import { IJoystickProps } from "../interface";
 
 const Joystick: React.FunctionComponent<IJoystickProps> = ({
   handleClickLeft,
@@ -22,7 +17,6 @@ const Joystick: React.FunctionComponent<IJoystickProps> = ({
     intervalRef.current = window.setInterval(() => {
       callback();
     }, 150);
-    // intervalRef.current = window.setInterval(() => console.log("hehe"), 250);
   };
   const stopInterval = () => {
     if (intervalRef.current) {

@@ -1,22 +1,10 @@
-import {
-  ReactNode,
-  FunctionComponent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { AiFillCloseSquare } from "react-icons/ai";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import ReactHowler from "react-howler";
 import { BsMusicNote } from "react-icons/bs";
 import { TiCancel } from "react-icons/ti";
 import Modal from "./Modal";
-
-interface IPianoProps {
-  interactDistance: number;
-  xCoordinate: number;
-  setHandleKeyDownCallback: React.Dispatch<React.SetStateAction<() => void>>;
-  focusOnCanvas: () => void;
-}
+import NameTag from "./NameTag";
+import { IPianoProps } from "../interface";
 
 const Piano: FunctionComponent<IPianoProps> = ({
   interactDistance,
@@ -80,9 +68,7 @@ const Piano: FunctionComponent<IPianoProps> = ({
             }}
           >
             {/* glow */}
-            {isNear && (
-              <div className="transition-all mx-auto mb-[-100%] bg-orange-200/70 w-[200px] h-[200px] rounded-full"></div>
-            )}
+            {isNear && <NameTag content="Piano" />}
             {/* actual Piano */}
             <div className="width-[400px]">{image}</div>
           </div>

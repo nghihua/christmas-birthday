@@ -1,39 +1,11 @@
-import {
-  ReactNode,
-  FunctionComponent,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { IoFastFoodOutline } from "react-icons/io5";
 import LoadingModal from "./LoadingModal";
 import Modal from "./Modal";
+import NameTag from "./NameTag";
 import PaperModal from "./PaperModal";
-
-interface IFoodstallProps {
-  interactDistance: number;
-  xCoordinate: number;
-  setHandleKeyDownCallback: React.Dispatch<React.SetStateAction<() => void>>;
-  focusOnCanvas: () => void;
-}
-
-const foodList = [
-  {
-    label: "Pancake",
-    value: "pancake",
-    img: "https://2.bp.blogspot.com/-IYuKasIqJSI/WPVryfyuhkI/AAAAAAAOnAw/boSzUubeyR0ecILV-O-FDgijLLkm52fBwCLcB/s1600/AS002524_22.gif",
-  },
-  {
-    label: "Cupcake",
-    value: "cupcake",
-    img: "https://media2.giphy.com/media/L3KpMnDHfPqse6Jz6j/giphy.gif?cid=790b7611a54296017554f28b33bb48414e136f78fa0e6fc0",
-  },
-  {
-    label: "Kem con cá",
-    value: "fishicecream",
-    img: "https://media3.giphy.com/media/AM7L5s0gzx7fS24E1h/giphy.gif?cid=6c09b952f1281e3855d690fcb63fc3e1ad9af2d93620f823",
-  },
-];
+import { IFoodstallProps } from "../interface";
+import { foodList } from "../const/foodList";
 
 const Foodstall: FunctionComponent<IFoodstallProps> = ({
   interactDistance,
@@ -46,7 +18,6 @@ const Foodstall: FunctionComponent<IFoodstallProps> = ({
     <img src="https://cdn2.iconfinder.com/data/icons/food-and-market-stall/267/10-512.png" />
   );
   const size = 400;
-  const glowSize = 300;
   const [isNear, setIsNear] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
@@ -99,15 +70,7 @@ const Foodstall: FunctionComponent<IFoodstallProps> = ({
             }}
           >
             {/* glow */}
-            {isNear && (
-              <div
-                className="transition-all mx-auto mb-[-80%] bg-orange-200/70 rounded-full"
-                style={{
-                  width: glowSize + "px",
-                  height: glowSize + "px",
-                }}
-              ></div>
-            )}
+            {isNear && <NameTag content="Hàng đồ ăn" />}
             <div className="mb-[-30px]">{image}</div>
           </div>
         )}

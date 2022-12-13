@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ICanvasProps } from "../interfaces/rooms.interface";
-import ReactHowler from "react-howler";
+import { ICanvasProps } from "../interface";
 import Guitar from "./Piano";
 import Joystick from "./Joystick";
 import Snowfall from "react-snowfall";
