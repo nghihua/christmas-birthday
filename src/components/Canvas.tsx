@@ -5,6 +5,7 @@ import Guitar from "./Piano";
 import Joystick from "./Joystick";
 import Snowfall from "react-snowfall";
 import Passport from "./Passport";
+import Book from "./Book";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
@@ -18,7 +19,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const canvasRef = useRef<HTMLDivElement>(null);
   const catRef = useRef<HTMLDivElement>(null);
   const [guitarXCoordinate, setGuitarXCoordinate] = useState(400);
-  const [passportXCoordinate, setPassportXCoordinate] = useState(600);
+  const [bookXCoordinate, setBookXCoordinate] = useState(800);
   useEffect(() => {
     return () => {
       console.log(canvasRef);
@@ -32,9 +33,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const handleLeft = () => {
     setIsFacedLeft(true);
     setGuitarXCoordinate((oldGuitarXCoordinate) => oldGuitarXCoordinate + 20);
-    setPassportXCoordinate(
-      (oldPassportXCoordinate) => oldPassportXCoordinate + 20
-    );
+    setBookXCoordinate((oldBookXCoordinate) => oldBookXCoordinate + 20);
     setBackgroundPositionX(
       (oldBackgroundPositionX) => oldBackgroundPositionX + 20
     );
@@ -43,9 +42,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const handleRight = () => {
     setIsFacedLeft(false);
     setGuitarXCoordinate((oldGuitarXCoordinate) => oldGuitarXCoordinate - 20);
-    setPassportXCoordinate(
-      (oldPassportXCoordinate) => oldPassportXCoordinate - 20
-    );
+    setBookXCoordinate((oldBookXCoordinate) => oldBookXCoordinate - 20);
     setBackgroundPositionX(
       (oldBackgroundPositionX) => oldBackgroundPositionX - 20
     );
@@ -111,9 +108,9 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
           setHandleKeyDownCallback={setHandleKeyDownCallback}
           focusOnCanvas={focusOnCanvas}
         />
-        <Passport
+        <Book
           interactDistance={interactDistance}
-          xCoordinate={passportXCoordinate}
+          xCoordinate={bookXCoordinate}
           setHandleKeyDownCallback={setHandleKeyDownCallback}
           focusOnCanvas={focusOnCanvas}
         />
