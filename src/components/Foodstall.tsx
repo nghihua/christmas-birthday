@@ -7,6 +7,7 @@ import {
 } from "react";
 import { IoFastFoodOutline } from "react-icons/io5";
 import { TiCancel } from "react-icons/ti";
+import LoadingModal from "./LoadingModal";
 import Modal from "./Modal";
 import PaperModal from "./PaperModal";
 
@@ -49,6 +50,7 @@ const Foodstall: FunctionComponent<IFoodstallProps> = ({
   const glowSize = 300;
   const [isNear, setIsNear] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [selectedFood, setSelectedFood] = useState<string | undefined>(
     undefined
@@ -122,7 +124,7 @@ const Foodstall: FunctionComponent<IFoodstallProps> = ({
                   className="hover:bg-[#d9e46c] px-2 flex gap-1 items-center"
                   onClick={() => {
                     setSelectedFood(food.value);
-                    setShowMessage(true);
+                    setShowLoading(true);
                     handleCloseModal();
                   }}
                 >
@@ -132,6 +134,17 @@ const Foodstall: FunctionComponent<IFoodstallProps> = ({
               ))}
             </div>
           }
+        />
+      )}
+      {showLoading && (
+        <LoadingModal
+          content="Đang nấu đợi xíu"
+          duration={3000}
+          img={
+            <img src="https://www.icegif.com/wp-content/uploads/chef-pusheen-icegif.gif" />
+          }
+          callback={() => setShowMessage(true)}
+          toggleModal={setShowLoading}
         />
       )}
       {showMessage && selectedFood && (
