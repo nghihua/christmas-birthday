@@ -34,7 +34,6 @@ const LoadingModal: React.FunctionComponent<IPaperModalProps> = ({
         />
         <div className="p-3">
           <div className="flex justify-center items-center gap-2"></div>
-          <hr className="my-2" />
           <div className="w-[200px]">{img}</div>
 
           <div className="text-center font-pangolin text-gray-800">

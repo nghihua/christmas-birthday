@@ -151,22 +151,14 @@ const Foodstall: FunctionComponent<IFoodstallProps> = ({
         <>
           <PaperModal
             title="Notes"
-            content={
-              <div>
-                <p className="text-xl leading-10">
-                  Đồ ăn tới rồi nè. Chúc em một năm mới nhiều điều ngọt ngào như
-                  món này nha.
-                </p>
-                <div className="my-5 flex justify-center items-center">
-                  <img
-                    className="w-[200px]"
-                    src={
-                      foodList.filter((item) => item.value === selectedFood)[0]
-                        .img
-                    }
-                  />
-                </div>
-              </div>
+            content="Đồ ăn tới rồi nè. Chúc em một năm mới nhiều điều ngọt ngào như món này nha."
+            img={
+              <img
+                className="w-[200px]"
+                src={
+                  foodList.filter((item) => item.value === selectedFood)[0].img
+                }
+              />
             }
             handleCloseModal={() => setShowMessage(false)}
           />

@@ -93,19 +93,12 @@ const Trophy: FunctionComponent<ITrophyProps> = ({
         <>
           <PaperModal
             title="Notes"
-            content={
-              <div>
-                <p className="text-2xl leading-10">
-                  Chúc em tuổi mới học được nhiều điều hay, thành tích tốt, ngày
-                  càng xuất sắc
-                </p>
-                <div className="my-5 flex justify-center items-center">
-                  <img
-                    className="w-[200px]"
-                    src="https://stickershop.line-scdn.net/stickershop/v1/product/1242410/LINEStorePC/main.png"
-                  />
-                </div>
-              </div>
+            content="Chúc em tuổi mới học được nhiều điều hay, thành tích tốt, ngày càng xuất sắc"
+            img={
+              <img
+                className="w-[200px]"
+                src="https://stickershop.line-scdn.net/stickershop/v1/product/1242410/LINEStorePC/main.png"
+              />
             }
             handleCloseModal={() => setShowGif(false)}
           />
