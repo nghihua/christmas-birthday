@@ -22,7 +22,7 @@ const LoadingModal: React.FunctionComponent<ILoadingModalProps> = ({
       <div className="max-w-[80vw] sm:max-w-[500px] relative p-7 flex justify-center items-center">
         <img
           className="absolute z-[-10] h-full w-full rotate-6"
-          src="https://www.pngkit.com/png/full/21-219902_torn-paper-png.png"
+          src="paper-min.png"
         />
         <div className="p-3">
           <div className="flex justify-center items-center gap-2"></div>

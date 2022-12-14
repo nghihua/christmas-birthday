@@ -5,6 +5,7 @@ import { TiCancel } from "react-icons/ti";
 import Modal from "./Modal";
 import NameTag from "./NameTag";
 import { IPianoProps } from "../interface";
+import LoadingModal from "./LoadingModal";
 
 const Piano: FunctionComponent<IPianoProps> = ({
   interactDistance,
@@ -18,6 +19,7 @@ const Piano: FunctionComponent<IPianoProps> = ({
   const [isNear, setIsNear] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [music, setMusic] = useState<string | undefined>(undefined);
+  const [showLoading, setShowLoading] = useState(false);
 
   const songList = [
     { title: "Happy Birthday - Miranda Wong", src: "birthday-mirandawong.mp3" },
@@ -85,6 +87,7 @@ const Piano: FunctionComponent<IPianoProps> = ({
                   className="hover:bg-[#d9e46c] px-2 flex gap-1 items-center"
                   onClick={() => {
                     setMusic(song.src);
+                    setShowLoading(true);
                     handleCloseModal();
                   }}
                 >
@@ -103,6 +106,17 @@ const Piano: FunctionComponent<IPianoProps> = ({
               </button>
             </div>
           }
+        />
+      )}
+      {showLoading && (
+        <LoadingModal
+          content="Đợi xíu nhạc lên liền nha"
+          duration={3000}
+          img={
+            <img src="https://media.baamboozle.com/uploads/images/428107/1652094753_50744_gif-url.gif" />
+          }
+          callback={() => {}}
+          toggleModal={setShowLoading}
         />
       )}
       <div className="hidden">
