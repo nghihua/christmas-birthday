@@ -114,7 +114,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
       <div className="h-full relative">
         {/* backdrop */}
         <div
-          className="absolute top-0 w-full h-full bg-cover bg-repeat-x"
+          className="absolute top-0 w-full h-full mb-20 bg-cover bg-repeat-x"
           style={{
             backgroundImage:
               "url(https://i.ibb.co/F6yscH1/winter-background.jpg)",

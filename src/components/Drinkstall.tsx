@@ -120,7 +120,7 @@ const Drinkstall: FunctionComponent<IDrinkstallProps> = ({
             extraContent={
               <div className="flex flex-col gap-2">
                 <img className="w-[200px] mx-auto" src={selectedFood.img} />
-                <blockquote className="text-xl italic font-patrick text-center">
+                <blockquote className="sm:text-xl text-sm italic font-patrick text-center">
                   “{selectedFood.quote}”
                 </blockquote>
               </div>
