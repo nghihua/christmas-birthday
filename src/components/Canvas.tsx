@@ -8,6 +8,7 @@ import Trophy from "./Trophy";
 import Drinkstall from "./Drinkstall";
 import ShootingStar from "./ShootingStar";
 import FocusReminder from "./FocusReminder";
+import Greeting from "./Greeting";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
@@ -109,9 +110,10 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
       onFocus={() => {
         setShowFocusReminder(false);
       }}
-      className="overflow-hidden relative md:max-w-[700px] w-screen md:h-[70vh] h-screen sm:rounded-lg flex flex-col"
+      className="overflow-hidden relative md:max-w-[80vw] md:h-auto md:aspect-video w-screen h-screen sm:rounded-lg flex flex-col"
     >
       <div className="h-full relative">
+        <Greeting />
         {/* backdrop */}
         <div
           className="absolute top-0 w-full h-full mb-20 bg-cover bg-repeat-x"
