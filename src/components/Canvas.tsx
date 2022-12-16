@@ -11,6 +11,7 @@ import FocusReminder from "./FocusReminder";
 import Greeting from "./Greeting";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
+  const [showGreeting, setShowGreeting] = useState(true);
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
   const [isFacedLeft, setIsFacedLeft] = useState<boolean>(true);
   const [handleKeyDownCallback, setHandleKeyDownCallback] = useState<
@@ -110,10 +111,9 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
       onFocus={() => {
         setShowFocusReminder(false);
       }}
-      className="overflow-hidden relative md:max-w-[80vw] md:h-auto md:aspect-video w-screen h-screen sm:rounded-lg flex flex-col"
+      className="overflow-hidden relative md:max-w-[80vw] md:h-auto md:aspect-square lg:aspect-video w-screen h-screen sm:rounded-lg flex flex-col"
     >
       <div className="h-full relative">
-        <Greeting />
         {/* backdrop */}
         <div
           className="absolute top-0 w-full h-full mb-20 bg-cover bg-repeat-x"
@@ -125,50 +125,58 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
         >
           <Snowfall />
         </div>
-
-        {/* floor */}
-        {/* cat situated at the end of wall */}
-        <div
-          ref={catRef}
-          className={`absolute bottom-10 z-10`}
-          style={{
-            left: `${catXCoordinate}px`,
-            width: `${catSize}px`,
-          }}
-        >
-          <img className={`${isFacedLeft ? "" : "flipped"}`} src="cat.png" />
-        </div>
-        {/* guitar situated at the center of the room */}
-        <Guitar
-          interactDistance={interactDistance}
-          xCoordinate={guitarXCoordinate}
-          setHandleKeyDownCallback={setHandleKeyDownCallback}
-          focusOnCanvas={focusOnCanvas}
-        />
-        <Trophy
-          interactDistance={interactDistance}
-          xCoordinate={trophyXCoordinate}
-          setHandleKeyDownCallback={setHandleKeyDownCallback}
-          focusOnCanvas={focusOnCanvas}
-        />
-        <Foodstall
-          interactDistance={interactDistance}
-          xCoordinate={foodstallXCoordinate}
-          setHandleKeyDownCallback={setHandleKeyDownCallback}
-          focusOnCanvas={focusOnCanvas}
-        />
-        <Drinkstall
-          interactDistance={interactDistance}
-          xCoordinate={drinkstallXCoordinate}
-          setHandleKeyDownCallback={setHandleKeyDownCallback}
-          focusOnCanvas={focusOnCanvas}
-        />
-        <ShootingStar
-          interactDistance={interactDistance}
-          xCoordinate={shootingStarXCoordinate}
-          setHandleKeyDownCallback={setHandleKeyDownCallback}
-          focusOnCanvas={focusOnCanvas}
-        />
+        {showGreeting ? (
+          <Greeting callback={() => setShowGreeting(false)} />
+        ) : (
+          <>
+            {/* floor */}
+            {/* cat situated at the end of wall */}
+            <div
+              ref={catRef}
+              className={`absolute bottom-10 z-10`}
+              style={{
+                left: `${catXCoordinate}px`,
+                width: `${catSize}px`,
+              }}
+            >
+              <img
+                className={`${isFacedLeft ? "" : "flipped"}`}
+                src="cat.png"
+              />
+            </div>
+            {/* guitar situated at the center of the room */}
+            <Guitar
+              interactDistance={interactDistance}
+              xCoordinate={guitarXCoordinate}
+              setHandleKeyDownCallback={setHandleKeyDownCallback}
+              focusOnCanvas={focusOnCanvas}
+            />
+            <Trophy
+              interactDistance={interactDistance}
+              xCoordinate={trophyXCoordinate}
+              setHandleKeyDownCallback={setHandleKeyDownCallback}
+              focusOnCanvas={focusOnCanvas}
+            />
+            <Foodstall
+              interactDistance={interactDistance}
+              xCoordinate={foodstallXCoordinate}
+              setHandleKeyDownCallback={setHandleKeyDownCallback}
+              focusOnCanvas={focusOnCanvas}
+            />
+            <Drinkstall
+              interactDistance={interactDistance}
+              xCoordinate={drinkstallXCoordinate}
+              setHandleKeyDownCallback={setHandleKeyDownCallback}
+              focusOnCanvas={focusOnCanvas}
+            />
+            <ShootingStar
+              interactDistance={interactDistance}
+              xCoordinate={shootingStarXCoordinate}
+              setHandleKeyDownCallback={setHandleKeyDownCallback}
+              focusOnCanvas={focusOnCanvas}
+            />
+          </>
+        )}
       </div>
       <Joystick
         handleClickLeft={handleLeft}
