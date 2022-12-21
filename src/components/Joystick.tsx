@@ -25,7 +25,7 @@ const Joystick: React.FunctionComponent<IJoystickProps> = ({
     }
   };
   return (
-    <div className="pb-[120px] md:hidden w-screen flex justify-between items-center gap-2 z-20 bg-[#3a50c1]/50 px-7 py-3">
+    <div className="pb-[120px] lg:hidden w-screen flex justify-between items-center gap-2 z-20 bg-[#3a50c1]/50 px-7 py-3">
       <div className="flex gap-3">
         <button
           onMouseDown={handleClickLeft}

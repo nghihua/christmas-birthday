@@ -11,7 +11,7 @@ import FocusReminder from "./FocusReminder";
 import Greeting from "./Greeting";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
-  const [showGreeting, setShowGreeting] = useState(true);
+  const [showGreeting, setShowGreeting] = useState(false);
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
   const [isFacedLeft, setIsFacedLeft] = useState<boolean>(true);
   const [handleKeyDownCallback, setHandleKeyDownCallback] = useState<
@@ -111,7 +111,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
       onFocus={() => {
         setShowFocusReminder(false);
       }}
-      className="overflow-hidden relative md:max-w-[80vw] md:h-auto md:aspect-square lg:aspect-video w-screen h-screen sm:rounded-lg flex flex-col"
+      className="overflow-hidden relative lg:max-w-[80vw] lg:h-auto lg:aspect-video w-screen h-screen sm:rounded-lg flex flex-col"
     >
       <div className="h-full relative">
         {/* backdrop */}
