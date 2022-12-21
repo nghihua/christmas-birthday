@@ -9,7 +9,7 @@ const Modal: React.FunctionComponent<IModalProps> = ({
 }) => {
   return (
     <div className="h-full w-full z-[30] bg-black/30 backdrop-blur-sm transition-all absolute top-0 left-0 flex justify-center items-center">
-      <div className="w-1/2 bg-white p-3 rounded-md">
+      <div className="md:w-1/2 w-3/4 h-fit bg-white p-3 rounded-md">
         <div className="flex justify-center items-center gap-2">
           <div className="font-bold text-lg lg:text-2xl">{title}</div>
           <button onClick={handleCloseModal}>

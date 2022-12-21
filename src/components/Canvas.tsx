@@ -11,7 +11,8 @@ import FocusReminder from "./FocusReminder";
 import Greeting from "./Greeting";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
-  const [showGreeting, setShowGreeting] = useState(false);
+  const [showGreeting, setShowGreeting] = useState(true);
+  const [backgroundImage, setBackgroundImage] = useState("");
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
   const [isFacedLeft, setIsFacedLeft] = useState<boolean>(true);
   const [handleKeyDownCallback, setHandleKeyDownCallback] = useState<
@@ -31,10 +32,13 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [showFocusReminder, setShowFocusReminder] = useState(false);
 
   useEffect(() => {
-    return () => {
-      console.log(canvasRef);
+    const src = "https://i.ibb.co/F6yscH1/winter-background.jpg";
+    let img = new Image();
+    img.src = src;
+    img.onload = () => {
+      setBackgroundImage("url(" + src + ")");
     };
-  }, [canvasRef.current]);
+  }, []);
 
   const focusOnCanvas = () => {
     canvasRef.current?.focus();
@@ -103,7 +107,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   return (
     <div
       ref={canvasRef}
-      onKeyDown={handleKeyDown}
+      onKeyDown={showGreeting ? () => {} : handleKeyDown}
       tabIndex={0}
       onBlur={() => {
         setShowFocusReminder(true);
@@ -118,15 +122,19 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
         <div
           className="absolute top-0 w-full h-full mb-20 bg-cover bg-repeat-x"
           style={{
-            backgroundImage:
-              "url(https://i.ibb.co/F6yscH1/winter-background.jpg)",
+            backgroundImage: backgroundImage,
             backgroundPositionX: `${backgroundPositionX}px`,
           }}
         >
           <Snowfall />
         </div>
-        {showGreeting ? (
-          <Greeting callback={() => setShowGreeting(false)} />
+        {backgroundImage && showGreeting ? (
+          <Greeting
+            callback={() => {
+              setShowGreeting(false);
+              focusOnCanvas();
+            }}
+          />
         ) : (
           <>
             {/* floor */}
