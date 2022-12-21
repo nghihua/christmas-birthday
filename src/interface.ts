@@ -59,7 +59,7 @@ export interface IModalProps {
 export interface IPaperModalProps {
   title: string;
   content: string;
-  extraContent: React.ReactNode;
+  extraContent?: React.ReactNode;
   handleCloseModal: () => void;
 }
 

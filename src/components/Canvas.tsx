@@ -9,9 +9,11 @@ import Drinkstall from "./Drinkstall";
 import ShootingStar from "./ShootingStar";
 import FocusReminder from "./FocusReminder";
 import Greeting from "./Greeting";
+import PaperModal from "./PaperModal";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [showGreeting, setShowGreeting] = useState(true);
+  const [showFarewell, setShowFarewell] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState("");
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
   const [isFacedLeft, setIsFacedLeft] = useState<boolean>(true);
@@ -29,6 +31,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [drinkstallXCoordinate, setDrinkstallXCoordinate] = useState(1600);
   const [trophyXCoordinate, setTrophyXCoordinate] = useState(2800);
   const [shootingStarXCoordinate, setShootingStarXCoordinate] = useState(3400);
+  const endCoordinate = 3800;
 
   const [showFocusReminder, setShowFocusReminder] = useState(false);
 
@@ -40,6 +43,12 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
       setBackgroundImage("url(" + src + ")");
     };
   }, []);
+
+  useEffect(() => {
+    if (backgroundPositionX <= -endCoordinate) {
+      setShowFarewell(true);
+    }
+  }, [backgroundPositionX]);
 
   const focusOnCanvas = () => {
     canvasRef.current?.focus();
@@ -116,7 +125,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   return (
     <div
       ref={canvasRef}
-      onKeyDown={showGreeting ? () => {} : handleKeyDown}
+      onKeyDown={showGreeting || showFarewell ? () => {} : handleKeyDown}
       tabIndex={0}
       onBlur={() => {
         setShowFocusReminder(true);
@@ -192,6 +201,16 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
               setHandleKeyDownCallback={setHandleKeyDownCallback}
               focusOnCanvas={focusOnCanvas}
             />
+            {showFarewell && (
+              <PaperModal
+                title="Xong rồi"
+                content="Tới đây là hết rồi"
+                handleCloseModal={() => {
+                  setShowFarewell(false);
+                  focusOnCanvas();
+                }}
+              ></PaperModal>
+            )}
           </>
         )}
       </div>
