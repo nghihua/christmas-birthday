@@ -20,6 +20,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   >(() => {});
   const catSize = 200;
   const interactDistance = 150;
+  const speed = 40;
   const [backgroundPositionX, setBackgroundPositionX] = useState(0);
   const canvasRef = useRef<HTMLDivElement>(null);
   const catRef = useRef<HTMLDivElement>(null);
@@ -49,37 +50,45 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
     if (backgroundPositionX >= 0) {
       return;
     }
-    setGuitarXCoordinate((oldGuitarXCoordinate) => oldGuitarXCoordinate + 20);
-    setTrophyXCoordinate((oldTrophyXCoordinate) => oldTrophyXCoordinate + 20);
+    setGuitarXCoordinate(
+      (oldGuitarXCoordinate) => oldGuitarXCoordinate + speed
+    );
+    setTrophyXCoordinate(
+      (oldTrophyXCoordinate) => oldTrophyXCoordinate + speed
+    );
     setFoodstallXCoordinate(
-      (oldFoodstallXCoordinate) => oldFoodstallXCoordinate + 20
+      (oldFoodstallXCoordinate) => oldFoodstallXCoordinate + speed
     );
     setDrinkstallXCoordinate(
-      (oldDrinkstallXCoordinate) => oldDrinkstallXCoordinate + 20
+      (oldDrinkstallXCoordinate) => oldDrinkstallXCoordinate + speed
     );
     setShootingStarXCoordinate(
-      (oldShootingStarXCoordinate) => oldShootingStarXCoordinate + 20
+      (oldShootingStarXCoordinate) => oldShootingStarXCoordinate + speed
     );
     setBackgroundPositionX(
-      (oldBackgroundPositionX) => oldBackgroundPositionX + 20
+      (oldBackgroundPositionX) => oldBackgroundPositionX + speed
     );
   };
 
   const handleRight = () => {
     setIsFacedLeft(false);
-    setGuitarXCoordinate((oldGuitarXCoordinate) => oldGuitarXCoordinate - 20);
-    setTrophyXCoordinate((oldTrophyXCoordinate) => oldTrophyXCoordinate - 20);
+    setGuitarXCoordinate(
+      (oldGuitarXCoordinate) => oldGuitarXCoordinate - speed
+    );
+    setTrophyXCoordinate(
+      (oldTrophyXCoordinate) => oldTrophyXCoordinate - speed
+    );
     setFoodstallXCoordinate(
-      (oldFoodstallXCoordinate) => oldFoodstallXCoordinate - 20
+      (oldFoodstallXCoordinate) => oldFoodstallXCoordinate - speed
     );
     setDrinkstallXCoordinate(
-      (oldDrinkstallXCoordinate) => oldDrinkstallXCoordinate - 20
+      (oldDrinkstallXCoordinate) => oldDrinkstallXCoordinate - speed
     );
     setShootingStarXCoordinate(
-      (oldShootingStarXCoordinate) => oldShootingStarXCoordinate - 20
+      (oldShootingStarXCoordinate) => oldShootingStarXCoordinate - speed
     );
     setBackgroundPositionX(
-      (oldBackgroundPositionX) => oldBackgroundPositionX - 20
+      (oldBackgroundPositionX) => oldBackgroundPositionX - speed
     );
   };
 

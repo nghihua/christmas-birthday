@@ -77,7 +77,12 @@ const ShootingStar: FunctionComponent<IShootingStarProps> = ({
           handleCloseModal={handleCloseModal}
           content={
             <div className="flex flex-col gap-3">
-              <TextField label="Điều ước" multiline minRows={3} />
+              <TextField
+                className="font-pangolin"
+                label="Điều ước"
+                multiline
+                minRows={3}
+              />
               <Button
                 variant="contained"
                 onClick={() => {
