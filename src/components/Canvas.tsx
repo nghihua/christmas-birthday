@@ -31,7 +31,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [drinkstallXCoordinate, setDrinkstallXCoordinate] = useState(1600);
   const [trophyXCoordinate, setTrophyXCoordinate] = useState(2800);
   const [shootingStarXCoordinate, setShootingStarXCoordinate] = useState(3400);
-  const endCoordinate = 3800;
+  const endCoordinate = 3600;
 
   const [showFocusReminder, setShowFocusReminder] = useState(false);
 
@@ -204,8 +204,8 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
             />
             {showFarewell && (
               <PaperModal
-                title="Xong rồi"
-                content="Tới đây là hết rồi"
+                title="🚦 Kết thúc hành trình"
+                content="Tới đây là hết rồi. Hy vọng em thích món quà nho nhỏ này. Để phòng ngừa em không thích, chị có chuẩn bị một món quà khác ^^. Còn giờ thì chúc em ngủ ngon nha, để ngày mai còn đón trọn được một ngày sinh nhật thật vui. 🌼"
                 handleCloseModal={() => {
                   setShowFarewell(false);
                   focusOnCanvas();

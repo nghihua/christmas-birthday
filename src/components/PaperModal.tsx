@@ -11,7 +11,7 @@ const PaperModal: React.FunctionComponent<IPaperModalProps> = ({
 }) => {
   return (
     <div className="h-full w-full z-[30] bg-black/30 backdrop-blur-sm transition-all absolute top-0 left-0 flex justify-center items-center">
-      <div className="w-3/4 h-fit relative p-7 flex justify-center items-center">
+      <div className="w-full sm:w-3/4 lg:w-1/2 max-h-3/4 relative p-7 flex justify-center items-center">
         <img
           className="absolute z-[-10] h-full w-full rotate-6"
           src="paper-min.png"
