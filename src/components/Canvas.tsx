@@ -12,7 +12,7 @@ import Greeting from "./Greeting";
 import PaperModal from "./PaperModal";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
-  const [showGreeting, setShowGreeting] = useState(true);
+  const [showGreeting, setShowGreeting] = useState(false);
   const [showFarewell, setShowFarewell] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState("");
   const [catXCoordinate, setCatXCoordinate] = useState<number>(0);
@@ -41,6 +41,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
     img.src = src;
     img.onload = () => {
       setBackgroundImage("url(" + src + ")");
+      setShowGreeting(true);
     };
   }, []);
 
