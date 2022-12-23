@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AiFillCloseSquare } from "react-icons/ai";
-import { IModalProps } from "../interface";
+import { IModalProps } from "../../interface";
 
 const Modal: React.FunctionComponent<IModalProps> = ({
   title,
@@ -19,7 +19,7 @@ const Modal: React.FunctionComponent<IModalProps> = ({
           </button>
         </div>
         <hr className="my-2" />
-        <div className="text-gray-800 font-pangolin text-md lg:text-2xl">
+        <div className="h-full text-gray-800 font-pangolin text-md lg:text-2xl">
           {content}
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import { IoFastFoodOutline } from "react-icons/io5";
-import LoadingModal from "./LoadingModal";
-import Modal from "./Modal";
+import LoadingModal from "./modals/LoadingModal";
+import Modal from "./modals/Modal";
 import NameTag from "./NameTag";
 import PaperModal from "./PaperModal";
 import { IDrinkItem, IDrinkstallProps } from "../interface";

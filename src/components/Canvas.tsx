@@ -10,6 +10,7 @@ import ShootingStar from "./ShootingStar";
 import FocusReminder from "./FocusReminder";
 import Greeting from "./Greeting";
 import PaperModal from "./PaperModal";
+import WordGame from "./WordGame";
 
 const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [showGreeting, setShowGreeting] = useState(false);
@@ -30,8 +31,9 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [foodstallXCoordinate, setFoodstallXCoordinate] = useState(1000);
   const [drinkstallXCoordinate, setDrinkstallXCoordinate] = useState(1600);
   const [trophyXCoordinate, setTrophyXCoordinate] = useState(2800);
-  const [shootingStarXCoordinate, setShootingStarXCoordinate] = useState(3400);
-  const endCoordinate = 3600;
+  const [wordGameXCoordinate, setWordGameXCoordinate] = useState(3400);
+  const [shootingStarXCoordinate, setShootingStarXCoordinate] = useState(3800);
+  const endCoordinate = 4000;
 
   const [showFocusReminder, setShowFocusReminder] = useState(false);
 
@@ -75,6 +77,9 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
     setShootingStarXCoordinate(
       (oldShootingStarXCoordinate) => oldShootingStarXCoordinate + speed
     );
+    setWordGameXCoordinate(
+      (oldWordGameXCoordinate) => oldWordGameXCoordinate + speed
+    );
     setBackgroundPositionX(
       (oldBackgroundPositionX) => oldBackgroundPositionX + speed
     );
@@ -96,6 +101,9 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
     );
     setShootingStarXCoordinate(
       (oldShootingStarXCoordinate) => oldShootingStarXCoordinate - speed
+    );
+    setWordGameXCoordinate(
+      (oldWordGameXCoordinate) => oldWordGameXCoordinate - speed
     );
     setBackgroundPositionX(
       (oldBackgroundPositionX) => oldBackgroundPositionX - speed
@@ -193,6 +201,12 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
             <Drinkstall
               interactDistance={interactDistance}
               xCoordinate={drinkstallXCoordinate}
+              setHandleKeyDownCallback={setHandleKeyDownCallback}
+              focusOnCanvas={focusOnCanvas}
+            />
+            <WordGame
+              interactDistance={interactDistance}
+              xCoordinate={wordGameXCoordinate}
               setHandleKeyDownCallback={setHandleKeyDownCallback}
               focusOnCanvas={focusOnCanvas}
             />

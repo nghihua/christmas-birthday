@@ -12,6 +12,9 @@ export interface IComponentProps {
 // Piano
 export interface IPianoProps extends IComponentProps {}
 
+// Word Game
+export interface IWordGameProps extends IComponentProps {}
+
 // Trophy
 export interface ITrophyProps extends IComponentProps {}
 

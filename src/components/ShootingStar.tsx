@@ -1,5 +1,5 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import Modal from "./Modal";
+import Modal from "./modals/Modal";
 import NameTag from "./NameTag";
 import PaperModal from "./PaperModal";
 import { IShootingStarProps } from "../interface";

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ILoadingModalProps } from "../interface";
+import { ILoadingModalProps } from "../../interface";
 
 const LoadingModal: React.FunctionComponent<ILoadingModalProps> = ({
   content,
