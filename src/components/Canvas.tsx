@@ -31,7 +31,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [foodstallXCoordinate, setFoodstallXCoordinate] = useState(1000);
   const [drinkstallXCoordinate, setDrinkstallXCoordinate] = useState(1600);
   const [trophyXCoordinate, setTrophyXCoordinate] = useState(2800);
-  const [wordGameXCoordinate, setWordGameXCoordinate] = useState(3400);
+  const [wordGameXCoordinate, setWordGameXCoordinate] = useState(3200);
   const [shootingStarXCoordinate, setShootingStarXCoordinate] = useState(3800);
   const endCoordinate = 4000;
 

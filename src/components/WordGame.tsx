@@ -36,8 +36,6 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
     if (answers.length >= numGuesses) {
       setShowCondolences(true);
     }
-    alert(currentAnswer);
-    alert(correctAnswer);
     if (currentAnswer == correctAnswer) {
       setShowCongratulations(true);
     }
@@ -175,9 +173,11 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
               <form onSubmit={handleSubmit}>
                 <input
                   value={currentAnswer}
-                  onChange={(e) =>
-                    setCurrentAnswer(e.target.value.toUpperCase())
-                  }
+                  onChange={(e) => {
+                    if (e.target.value.length <= correctAnswer.length) {
+                      setCurrentAnswer(e.target.value.toUpperCase());
+                    }
+                  }}
                   className="border border-gray-500 text-center text-xl"
                   type="text"
                   placeholder="Gõ vô đây rồi Enter"
