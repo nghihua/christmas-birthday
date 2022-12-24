@@ -24,6 +24,7 @@ const Piano: FunctionComponent<IPianoProps> = ({
   const songList = [
     { title: "Happy Birthday - Miranda Wong", src: "birthday-mirandawong.mp3" },
     { title: "Silent Night, Holy Night", src: "silentnightholynight.webm" },
+    { title: "Rudolph the Red-Nosed Reindeer", src: "rudolph.mp3" },
   ];
 
   useEffect(() => {
