@@ -135,7 +135,7 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
           handleCloseModal={handleCloseModal}
           content={
             <div className="flex flex-col gap-10 items-center">
-              <div className="flex flex-col-reverse gap-5 h-[100px] overflow-y-scroll">
+              <div className="w-full flex flex-col-reverse gap-5 h-[100px] overflow-y-scroll">
                 {Array.from(Array(numGuesses), (e, index) => {
                   if (answers[index])
                     return (
@@ -165,8 +165,9 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
                   onChange={(e) =>
                     setCurrentAnswer(e.target.value.toUpperCase())
                   }
-                  className="border border-gray-500 text-center"
+                  className="border border-gray-500 text-center text-xl"
                   type="text"
+                  placeholder="Gõ vô đây rồi Enter"
                   maxLength={correctAnswer.length}
                 />
               </form>

@@ -20,11 +20,11 @@ const WordRow: React.FunctionComponent<IWordRowProps> = ({
     setResult(checkAnswer(correctAnswer, word));
   }, [word]);
   return (
-    <div className="flex justify-around min-w-[300px] w-[40vw] text-5xl">
+    <div className="w-full flex justify-around gap-2 p-2 text-5xl">
       {Array.from(Array(wordLengthLimit), (e, i) => (
         <div
           key={i}
-          className="border border-black p-2 flex items-center justify-center w-[15%] aspect-square"
+          className="w-full h-full text-[3vw] border border-black flex items-center justify-center aspect-square"
           style={{
             backgroundColor: resultColorCodes[result[i]],
           }}
