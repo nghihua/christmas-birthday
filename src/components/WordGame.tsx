@@ -4,9 +4,10 @@ import Modal from "./modals/Modal";
 import NameTag from "./NameTag";
 import { IWordGameProps } from "../interface";
 import LoadingModal from "./modals/LoadingModal";
-import { getAlphabet } from "../utils/wordFunctions";
 import Alphabet from "./wordle/Alphabet";
 import WordRow from "./wordle/WordRow";
+import { numGuesses } from "../const/word";
+import useWordle from "../hooks/useWordle";
 
 const WordGame: FunctionComponent<IWordGameProps> = ({
   interactDistance,
@@ -14,6 +15,8 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
   setHandleKeyDownCallback,
   focusOnCanvas,
 }) => {
+  const { getAlphabet } = useWordle();
+  const { answerLengthLimit } = useWordle();
   const itemRef = useRef<HTMLDivElement>(null);
   const image = <img src="word-game.png" />;
   const size = 200;
@@ -28,9 +31,6 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
   );
   const [answers, setAnswers] = useState<string[]>([]);
   const [currentAnswer, setCurrentAnswer] = useState("");
-  const numGuesses = 5;
-  const answerLengthLimit = 5;
-  const correctAnswer = "happy";
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -42,17 +42,10 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
   };
 
   useEffect(() => {
-    console.log("inside getAlphabet useEffect");
-    console.log(getAlphabet());
     setAlphabetMap(new Map(getAlphabet()));
   }, [answers]);
 
   // end wordle stuff
-
-  const songList = [
-    { title: "Happy Birthday - Miranda Wong", src: "birthday-mirandawong.mp3" },
-    { title: "Silent Night, Holy Night", src: "silentnightholynight.webm" },
-  ];
 
   useEffect(() => {
     if (
@@ -106,30 +99,15 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
       </div>
       {showModal && (
         <Modal
-          title="CHOOSE YOUR MUSIC"
+          title="WORDLE"
           handleCloseModal={handleCloseModal}
           content={
             <div className="flex flex-col gap-10 items-center">
-              <div className="flex flex-col-reverse gap-5 h-[100px] overflow-y-scroll">
+              <div className="w-full flex flex-col-reverse gap-5 h-[100px] overflow-y-scroll">
                 {Array.from(Array(numGuesses), (e, index) => {
                   if (answers[index])
-                    return (
-                      <WordRow
-                        key={index}
-                        word={answers[index]}
-                        wordLengthLimit={answerLengthLimit}
-                        correctAnswer={correctAnswer}
-                      />
-                    );
-                  else
-                    return (
-                      <WordRow
-                        key={index}
-                        word=""
-                        wordLengthLimit={answerLengthLimit}
-                        correctAnswer={correctAnswer}
-                      />
-                    );
+                    return <WordRow key={index} word={answers[index]} />;
+                  else return <WordRow key={index} word="" />;
                 })}
               </div>
               <form onSubmit={handleSubmit}>
