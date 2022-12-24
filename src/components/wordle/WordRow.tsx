@@ -1,25 +1,29 @@
 import { useState, useEffect } from "react";
+import { checkAnswer } from "../../utils/wordFunctions";
 import { resultColorCodes } from "../../const/colorCodes";
-import useWordle from "../../hooks/useWordle";
 
 interface IWordRowProps {
   word: string;
+  wordLengthLimit: number;
+  correctAnswer: string;
 }
 
-const WordRow: React.FunctionComponent<IWordRowProps> = ({ word }) => {
-  const { checkAnswer, correctAnswer, answerLengthLimit } = useWordle();
+const WordRow: React.FunctionComponent<IWordRowProps> = ({
+  word,
+  wordLengthLimit,
+  correctAnswer,
+}) => {
   const [result, setResult] = useState<number[]>([]);
   useEffect(() => {
     if (!word) return;
-    alert(checkAnswer(word));
     setResult(checkAnswer(word));
   }, [word]);
   return (
-    <div className="w-full flex justify-around gap-2 p-2 text-5xl">
-      {Array.from(Array(answerLengthLimit), (e, i) => (
+    <div className="flex justify-around min-w-[300px] w-[40vw] text-5xl">
+      {Array.from(Array(wordLengthLimit), (e, i) => (
         <div
           key={i}
-          className="w-full h-full text-[3vw] border border-black flex items-center justify-center aspect-square"
+          className="border border-black p-2 flex items-center justify-center w-[15%] aspect-square"
           style={{
             backgroundColor: resultColorCodes[result[i]],
           }}
