@@ -1,4 +1,6 @@
-const correctAnswer = "HAPPY";
+export const correctAnswer = "HAPPY";
+export const numGuesses = 5;
+
 let correctAnswerSet = new Set<string>([]);
 for (let i = 0; i < correctAnswer.length; i++) {
   correctAnswerSet.add(correctAnswer[i]);

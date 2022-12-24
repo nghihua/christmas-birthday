@@ -1,10 +1,8 @@
 import { FunctionComponent, useEffect, useRef, useState } from "react";
-import ReactHowler from "react-howler";
 import Modal from "./modals/Modal";
 import NameTag from "./NameTag";
 import { IWordGameProps } from "../interface";
 import LoadingModal from "./modals/LoadingModal";
-import { getAlphabet } from "../utils/wordFunctions";
 import Alphabet from "./wordle/Alphabet";
 import WordRow from "./wordle/WordRow";
 
@@ -14,23 +12,21 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
   setHandleKeyDownCallback,
   focusOnCanvas,
 }) => {
+  const wordList = ["HAPPY", "BEAUTY", "SUCCESS", "MONEY", "CLEVER"];
   const itemRef = useRef<HTMLDivElement>(null);
   const image = <img src="word-game.png" />;
   const size = 200;
   const [isNear, setIsNear] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [music, setMusic] = useState<string | undefined>(undefined);
   const [showLoading, setShowLoading] = useState(false);
-
   // wordle
+  const [correctAnswer, setCorrectAnswer] = useState("WONDER");
+  const numGuesses = 5;
   const [alphabetMap, setAlphabetMap] = useState<Map<string, number>>(
     new Map()
   );
   const [answers, setAnswers] = useState<string[]>([]);
   const [currentAnswer, setCurrentAnswer] = useState("");
-  const numGuesses = 5;
-  const answerLengthLimit = 5;
-  const correctAnswer = "happy";
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -42,17 +38,46 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
   };
 
   useEffect(() => {
-    console.log("inside getAlphabet useEffect");
-    console.log(getAlphabet());
+    // init correct answer
+    const index = Math.floor(Math.random() * wordList.length);
+    setCorrectAnswer(wordList[index]);
+    // init alphabet map
+    for (let i = 0; i <= 25; i++) {
+      alphabetMap.set(String.fromCharCode(65 + i), 0);
+    }
+  }, []);
+
+  useEffect(() => {
     setAlphabetMap(new Map(getAlphabet()));
   }, [answers]);
 
-  // end wordle stuff
+  const checkAnswer = (correctAnswer: string, answer: string) => {
+    let correctAnswerSet = new Set<string>([]);
+    for (let i = 0; i < correctAnswer.length; i++) {
+      correctAnswerSet.add(correctAnswer[i]);
+    }
+    let result = [];
+    for (let i = 0; i < answer.length; i++) {
+      if (correctAnswerSet.has(answer[i])) {
+        result[i] = 2;
+        alphabetMap.set(answer[i], 2);
+        if (correctAnswer[i] === answer[i]) {
+          result[i] = 3;
+          alphabetMap.set(answer[i], 3);
+        }
+      } else {
+        result[i] = 1;
+        alphabetMap.delete(answer[i]);
+      }
+    }
+    return result;
+  };
 
-  const songList = [
-    { title: "Happy Birthday - Miranda Wong", src: "birthday-mirandawong.mp3" },
-    { title: "Silent Night, Holy Night", src: "silentnightholynight.webm" },
-  ];
+  const getAlphabet = () => {
+    return alphabetMap;
+  };
+
+  // end wordle stuff
 
   useEffect(() => {
     if (
@@ -117,8 +142,9 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
                       <WordRow
                         key={index}
                         word={answers[index]}
-                        wordLengthLimit={answerLengthLimit}
+                        wordLengthLimit={correctAnswer.length}
                         correctAnswer={correctAnswer}
+                        checkAnswer={checkAnswer}
                       />
                     );
                   else
@@ -126,8 +152,9 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
                       <WordRow
                         key={index}
                         word=""
-                        wordLengthLimit={answerLengthLimit}
+                        wordLengthLimit={correctAnswer.length}
                         correctAnswer={correctAnswer}
+                        checkAnswer={checkAnswer}
                       />
                     );
                 })}
@@ -140,7 +167,7 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
                   }
                   className="border border-gray-500 text-center"
                   type="text"
-                  maxLength={answerLengthLimit}
+                  maxLength={correctAnswer.length}
                 />
               </form>
               <Alphabet alphabetMap={alphabetMap} />
@@ -159,13 +186,6 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
           toggleModal={setShowLoading}
         />
       )}
-      <div className="hidden">
-        <ReactHowler
-          src={music ? music : "birthday.mp3"}
-          playing={music !== undefined}
-          loop
-        />
-      </div>
     </>
   );
 };

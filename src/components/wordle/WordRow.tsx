@@ -1,22 +1,23 @@
 import { useState, useEffect } from "react";
-import { checkAnswer } from "../../utils/wordFunctions";
 import { resultColorCodes } from "../../const/colorCodes";
 
 interface IWordRowProps {
   word: string;
   wordLengthLimit: number;
+  checkAnswer: Function;
   correctAnswer: string;
 }
 
 const WordRow: React.FunctionComponent<IWordRowProps> = ({
   word,
   wordLengthLimit,
+  checkAnswer,
   correctAnswer,
 }) => {
   const [result, setResult] = useState<number[]>([]);
   useEffect(() => {
     if (!word) return;
-    setResult(checkAnswer(word));
+    setResult(checkAnswer(correctAnswer, word));
   }, [word]);
   return (
     <div className="flex justify-around min-w-[300px] w-[40vw] text-5xl">
