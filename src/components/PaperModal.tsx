@@ -8,6 +8,7 @@ const PaperModal: React.FunctionComponent<IPaperModalProps> = ({
   content,
   extraContent,
   handleCloseModal,
+  typewriterEffect = true,
 }) => {
   return (
     <div className="h-full w-full z-[30] bg-black/30 backdrop-blur-sm transition-all absolute top-0 left-0 flex justify-center items-center">
@@ -27,16 +28,20 @@ const PaperModal: React.FunctionComponent<IPaperModalProps> = ({
           <div className="font-pangolin text-gray-800">
             <div>
               <p className="text-md sm:text-xl leading-10">
-                <Typewriter
-                  onInit={(typewriter) => {
-                    typewriter.typeString(content);
-                    typewriter.start();
-                  }}
-                  options={{
-                    autoStart: true,
-                    delay: 70,
-                  }}
-                />
+                {typewriterEffect ? (
+                  <Typewriter
+                    onInit={(typewriter) => {
+                      typewriter.typeString(content);
+                      typewriter.start();
+                    }}
+                    options={{
+                      autoStart: true,
+                      delay: 70,
+                    }}
+                  />
+                ) : (
+                  content
+                )}
               </p>
               <div className="my-5 flex justify-center items-center">
                 {extraContent && extraContent}

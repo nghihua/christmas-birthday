@@ -64,6 +64,7 @@ export interface IPaperModalProps {
   content: string;
   extraContent?: React.ReactNode;
   handleCloseModal: () => void;
+  typewriterEffect?: boolean;
 }
 
 // Name Tag

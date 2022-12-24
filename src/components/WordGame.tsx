@@ -5,6 +5,7 @@ import { IWordGameProps } from "../interface";
 import LoadingModal from "./modals/LoadingModal";
 import Alphabet from "./wordle/Alphabet";
 import WordRow from "./wordle/WordRow";
+import PaperModal from "./PaperModal";
 
 const WordGame: FunctionComponent<IWordGameProps> = ({
   interactDistance,
@@ -18,7 +19,9 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
   const size = 200;
   const [isNear, setIsNear] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [showLoading, setShowLoading] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false);
+  const [showCongratulations, setShowCongratulations] = useState(false);
+  const [showCondolences, setShowCondolences] = useState(false);
   // wordle
   const [correctAnswer, setCorrectAnswer] = useState("WONDER");
   const numGuesses = 5;
@@ -31,7 +34,12 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (answers.length >= numGuesses) {
-      alert("Hết lượt đoán");
+      setShowCondolences(true);
+    }
+    alert(currentAnswer);
+    alert(correctAnswer);
+    if (currentAnswer == correctAnswer) {
+      setShowCongratulations(true);
     }
     setAnswers((answers) => [currentAnswer, ...answers]);
     setCurrentAnswer("");
@@ -79,6 +87,11 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
 
   // end wordle stuff
 
+  useEffect(() => {
+    if (showModal) {
+      setShowWelcome(true);
+    }
+  }, [showModal]);
   useEffect(() => {
     if (
       0 > xCoordinate - interactDistance &&
@@ -131,7 +144,7 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
       </div>
       {showModal && (
         <Modal
-          title="CHOOSE YOUR MUSIC"
+          title="BIRTHDAY WORDLE"
           handleCloseModal={handleCloseModal}
           content={
             <div className="flex flex-col gap-10 items-center">
@@ -176,16 +189,41 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
           }
         />
       )}
-      {showLoading && (
-        <LoadingModal
-          content="Đợi xíu nhạc lên liền nha"
-          duration={3000}
-          img={
-            <img src="https://media.baamboozle.com/uploads/images/428107/1652094753_50744_gif-url.gif" />
-          }
-          callback={() => {}}
-          toggleModal={setShowLoading}
-        />
+      {showWelcome && (
+        <div className="text-sm">
+          <PaperModal
+            title="Hướng dẫn chơi Wordle"
+            content="Nhấn vào ô input, gõ rồi enter. Bảng chữ cái phía dưới giúp em keep track: chữ nào không đúng sẽ biến mất, đúng nhưng sai vị trí sẽ vàng, đúng thì xanh lá. Khung hiển thị những từ em đã enter phía trên có thể scroll lên scroll xuống để xem lại. Good luck 🍀"
+            handleCloseModal={() => setShowWelcome(false)}
+            typewriterEffect={false}
+          />
+        </div>
+      )}
+      {showCongratulations && (
+        <div className="text-sm">
+          <PaperModal
+            title="Congratulations 🎉"
+            content="Chúc em sẽ có được thứ mà từ này miêu tả nhá. Mỗi lần refresh trang sẽ là một từ khác nhau, ý nghĩa cái nào cũng tốt, xem như điềm lành em lấy vía khi chơi."
+            handleCloseModal={() => {
+              setShowCongratulations(false);
+              handleCloseModal();
+            }}
+            typewriterEffect={false}
+          />
+        </div>
+      )}
+      {showCondolences && (
+        <div className="text-sm">
+          <PaperModal
+            title="Hết lượt chơi rồi 😔"
+            content="Refresh trang để chơi tiếp nha (nhưng mỗi lần refresh sẽ bị đổi từ)."
+            handleCloseModal={() => {
+              setShowCondolences(false);
+              handleCloseModal();
+            }}
+            typewriterEffect={false}
+          />
+        </div>
       )}
     </>
   );
