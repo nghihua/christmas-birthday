@@ -27,13 +27,13 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
   const [backgroundPositionX, setBackgroundPositionX] = useState(0);
   const canvasRef = useRef<HTMLDivElement>(null);
   const catRef = useRef<HTMLDivElement>(null);
-  const [guitarXCoordinate, setGuitarXCoordinate] = useState(400);
-  const [foodstallXCoordinate, setFoodstallXCoordinate] = useState(1000);
-  const [drinkstallXCoordinate, setDrinkstallXCoordinate] = useState(1600);
-  const [trophyXCoordinate, setTrophyXCoordinate] = useState(2800);
-  const [wordGameXCoordinate, setWordGameXCoordinate] = useState(3200);
-  const [shootingStarXCoordinate, setShootingStarXCoordinate] = useState(3800);
-  const endCoordinate = 4000;
+  const [pianoXCoordinate, setPianoXCoordinate] = useState(400);
+  const [trophyXCoordinate, setTrophyXCoordinate] = useState(1000);
+  const [foodstallXCoordinate, setFoodstallXCoordinate] = useState(1400);
+  const [drinkstallXCoordinate, setDrinkstallXCoordinate] = useState(1800);
+  const [wordGameXCoordinate, setWordGameXCoordinate] = useState(3000);
+  const [shootingStarXCoordinate, setShootingStarXCoordinate] = useState(3600);
+  const endCoordinate = 3800;
 
   const [showFocusReminder, setShowFocusReminder] = useState(false);
 
@@ -62,9 +62,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
     if (backgroundPositionX >= 0) {
       return;
     }
-    setGuitarXCoordinate(
-      (oldGuitarXCoordinate) => oldGuitarXCoordinate + speed
-    );
+    setPianoXCoordinate((oldGuitarXCoordinate) => oldGuitarXCoordinate + speed);
     setTrophyXCoordinate(
       (oldTrophyXCoordinate) => oldTrophyXCoordinate + speed
     );
@@ -87,9 +85,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
 
   const handleRight = () => {
     setIsFacedLeft(false);
-    setGuitarXCoordinate(
-      (oldGuitarXCoordinate) => oldGuitarXCoordinate - speed
-    );
+    setPianoXCoordinate((oldGuitarXCoordinate) => oldGuitarXCoordinate - speed);
     setTrophyXCoordinate(
       (oldTrophyXCoordinate) => oldTrophyXCoordinate - speed
     );
@@ -182,7 +178,7 @@ const Canvas: React.FunctionComponent<ICanvasProps> = ({}) => {
             {/* guitar situated at the center of the room */}
             <Guitar
               interactDistance={interactDistance}
-              xCoordinate={guitarXCoordinate}
+              xCoordinate={pianoXCoordinate}
               setHandleKeyDownCallback={setHandleKeyDownCallback}
               focusOnCanvas={focusOnCanvas}
             />

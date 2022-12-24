@@ -74,7 +74,7 @@ const Trophy: FunctionComponent<ITrophyProps> = ({
       {showMessage && (
         <>
           <PaperModal
-            title="Notes"
+            title="Một chiếc cúp"
             content="Chúc em tuổi mới học được nhiều điều hay, thành tích tốt, ngày càng xuất sắc"
             extraContent={
               <img

@@ -206,7 +206,6 @@ const WordGame: FunctionComponent<IWordGameProps> = ({
             content="Chúc em sẽ có được thứ mà từ này miêu tả nhá. Mỗi lần refresh trang sẽ là một từ khác nhau, ý nghĩa cái nào cũng tốt, xem như điềm lành em lấy vía khi chơi."
             handleCloseModal={() => {
               setShowCongratulations(false);
-              handleCloseModal();
             }}
             typewriterEffect={false}
           />
